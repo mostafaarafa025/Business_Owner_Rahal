@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#FCECD2"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    android:layout_margin="4dp"
+    app:cardUseCompatPadding="true"
+    android:layout_height="260dp">
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       >
+
+   <de.hdodenhof.circleimageview.CircleImageView
+       android:layout_width="50dp"
+       android:layout_height="50dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:src="@drawable/ic_human"
+       android:id="@+id/human_iv"
+       android:layout_margin="12dp"
+      />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+         app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toEndOf="@id/human_iv"
+      android:text="Mostafa Arafa"
+          android:layout_margin="20dp"
+          android:id="@+id/human_name"
+          android:textStyle="bold"
+          android:textSize="15sp"
+          android:textColor="#8F9090"
+         />
+      <TextView
+          android:layout_width="300dp"
+          android:layout_height="wrap_content"
+         app:layout_constraintStart_toStartOf="@id/human_name"
+          app:layout_constraintTop_toBottomOf="@id/human_name"
+         android:layout_marginTop="8dp"
+          android:id="@+id/human_review"
+      android:text="@string/human_review"
+          android:textColor="#918383"
+         />
+      <RatingBar
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+      app:layout_constraintStart_toStartOf="@id/human_review"
+          app:layout_constraintTop_toBottomOf="@id/human_review"
+          style="?android:attr/ratingBarStyleIndicator"
+          android:numStars="5"
+          android:progressTint="#F2A11E"
+      android:id="@+id/human_rate"
+          android:rating="3.5"
+         />
+      <com.google.android.material.imageview.ShapeableImageView
+          android:layout_width="60dp"
+          android:layout_marginTop="4dp"
+          android:layout_height="60dp"
+          app:shapeAppearanceOverlay="@style/rounded"
+          android:id="@+id/human_add_image"
+         app:layout_constraintStart_toStartOf="@id/human_rate"
+         app:layout_constraintTop_toBottomOf="@id/human_rate"
+          android:src="@drawable/bruxies"
+         />
+      <com.google.android.material.imageview.ShapeableImageView
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          app:shapeAppearanceOverlay="@style/rounded"
+          android:layout_marginStart="8dp"
+         app:layout_constraintStart_toEndOf="@id/human_add_image"
+         app:layout_constraintBottom_toBottomOf="@id/human_add_image"
+          android:src="@drawable/bruxies"
+         />
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

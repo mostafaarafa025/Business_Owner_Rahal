@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+        <TextView
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="12dp"
+            android:layout_width="wrap_content"
+            android:textColor="#252525"
+            android:id="@+id/identify_id"
+            android:layout_height="wrap_content"
+            android:text="Identify your location"
+            android:textSize="24sp"
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_view_id"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+           android:layout_marginStart="8dp"
+            android:src="@drawable/maps_image"
+            android:layout_marginTop="12dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toBottomOf="@id/identify_id"
+            app:layout_constraintStart_toStartOf="@id/identify_id"
+            app:shapeAppearanceOverlay="@style/rounded"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/government_spinner_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_down"
+            app:layout_constraintStart_toStartOf="@id/image_view_id"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/image_view_id"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/government_spinner_auto_complete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text"
+                android:inputType="none"
+                android:padding="14dp"
+                android:text="Government"
+                android:textColor="#8F9090" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/area_spinner_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_down"
+            app:layout_constraintStart_toStartOf="@id/image_view_id"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/government_spinner_icon"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/area_spinner_auto_complete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text"
+                android:inputType="none"
+                android:padding="14dp"
+                android:text="Area"
+                android:textColor="#8F9090" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <EditText
+            android:id="@+id/full_address_edit_text"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="#8F9090"
+            android:background="@drawable/custom_edit_text"
+            android:hint="Full Address"
+            android:inputType=""
+            android:padding="12dp"
+            app:layout_constraintStart_toStartOf="@id/image_view_id"
+            app:layout_constraintTop_toBottomOf="@id/area_spinner_icon" />
+
+        <EditText
+            android:id="@+id/map_location_edit_text"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="#8F9090"
+            android:background="@drawable/custom_edit_text"
+            android:hint="Map Location"
+            android:inputType=""
+            android:padding="12dp"
+            app:layout_constraintStart_toStartOf="@id/image_view_id"
+            app:layout_constraintTop_toBottomOf="@id/full_address_edit_text" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Picture"
+        app:layout_constraintStart_toStartOf="@id/identify_id"
+        app:layout_constraintTop_toBottomOf="@id/map_location_edit_text"
+        android:layout_marginTop="12dp"
+        android:id="@+id/upload_picture_id"
+        android:textSize="24sp"
+        android:textColor="#252525"
+        android:fontFamily="sans-serif-medium"
+        />
+
+              <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+                  android:layout_marginStart="4dp"
+                  android:layout_marginTop="12dp"
+            app:layout_constraintStart_toEndOf="@id/upload_picture_id"
+            app:layout_constraintBottom_toBottomOf="@id/upload_picture_id"
+            android:src="@drawable/add_image"
+                android:id="@+id/add_image_id"
+            android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/rounded"
+            />
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        app:layout_constraintStart_toStartOf="@id/upload_picture_id"
+        app:layout_constraintTop_toBottomOf="@id/upload_picture_id"
+        android:id="@+id/ex_image_1"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/bruxies"
+        />
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            app:layout_constraintStart_toEndOf="@id/ex_image_1"
+            app:layout_constraintBottom_toBottomOf="@id/ex_image_1"
+           android:id="@+id/ex_image_2"
+            android:layout_marginStart="8dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/food"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/image_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="@id/upload_picture_id"
+            app:layout_constraintTop_toBottomOf="@id/upload_picture_id"
+            tools:listitem="@layout/image_view_item" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="120dp"
+            android:backgroundTint="#F2A11E"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintTop_toBottomOf="@id/upload_picture_id"
+
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/already_member_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already a member? "
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/floating_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <TextView
+            android:id="@+id/log_in_text_veiw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Log In"
+            android:textColor="#E76D24"
+            app:layout_constraintStart_toEndOf="@id/already_member_text_view"
+            app:layout_constraintTop_toTopOf="@id/already_member_text_view"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

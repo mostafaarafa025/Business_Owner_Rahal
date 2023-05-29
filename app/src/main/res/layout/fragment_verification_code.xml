@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Ui.Insights.Signup.VerificationCodeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/back_arrow_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/verificatin_code_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="verification_code"
+            android:textColor="#252525"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/back_arrow_button" />
+
+        <TextView
+            android:id="@+id/code_sent_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:text="verification code was sent to your email"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/verificatin_code_text_view" />
+
+        <EditText
+            android:id="@+id/first_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="."
+            android:maxLength="1"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:padding="16dp"
+            app:layout_constraintEnd_toStartOf="@id/second_edit_text"
+            app:layout_constraintStart_toStartOf="@id/code_sent_text_view"
+            app:layout_constraintTop_toBottomOf="@id/code_sent_text_view" />
+
+        <EditText
+            android:id="@+id/second_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="."
+            android:maxLength="1"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:padding="16dp"
+            app:layout_constraintEnd_toStartOf="@id/third_edit_text"
+            app:layout_constraintStart_toEndOf="@id/first_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/code_sent_text_view" />
+
+        <EditText
+            android:id="@+id/third_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="."
+            android:maxLength="1"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:padding="16dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@id/fourth_edit_text"
+            app:layout_constraintStart_toEndOf="@id/second_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/code_sent_text_view" />
+
+        <EditText
+            android:id="@+id/fourth_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="."
+            android:maxLength="1"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:padding="16dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@id/code_sent_text_view"
+            app:layout_constraintStart_toEndOf="@id/third_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/code_sent_text_view" />
+
+        <TextView
+            android:id="@+id/resend_code_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Resend in 1:30 mins"
+            app:layout_constraintStart_toStartOf="@id/first_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/first_edit_text" />
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:backgroundTint="#E76D24"
+            android:padding="12dp"
+            android:text="Next"
+            app:cornerRadius="10dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/verificatin_code_text_view"
+            app:layout_constraintTop_toBottomOf="@id/resend_code_text_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Ui.Insights.Signup.LoginFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/signup_background">
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/signup_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <ImageView
+            android:id="@+id/back_arrow_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/welcome_back_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome back"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#252525"
+            app:layout_constraintStart_toStartOf="@id/image_view"
+            app:layout_constraintEnd_toEndOf="@id/image_view"
+            app:layout_constraintTop_toBottomOf="@id/image_view"
+            />
+        <TextView
+            android:id="@+id/acess_account_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sign in to access your account"
+            android:textColor="#252525"
+            app:layout_constraintStart_toStartOf="@id/welcome_back_text_view"
+            app:layout_constraintEnd_toEndOf="@id/welcome_back_text_view"
+            app:layout_constraintTop_toBottomOf="@id/welcome_back_text_view"
+            />
+        <EditText
+            android:id="@+id/email_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="32dp"
+            android:inputType="textEmailAddress"
+            android:hint="Enter your email"
+            android:padding="12dp"
+            android:background="@drawable/custom_edit_text"
+            android:drawableEnd="@drawable/ic_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/acess_account_text_view"/>
+        <TextView
+            android:id="@+id/error_message_valid_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF0404"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/email_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/email_edit_text"
+            tools:text="Name is required"
+            />
+        <EditText
+            android:id="@+id/password_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:padding="12dp"
+            android:background="@drawable/custom_edit_text"
+            android:drawableEnd="@drawable/ic_password"
+            app:layout_constraintStart_toStartOf="@id/email_edit_text"
+            app:layout_constraintEnd_toEndOf="@id/email_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/email_edit_text"/>
+        <TextView
+            android:id="@+id/error_message_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF0404"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/password_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/password_edit_text"
+            tools:text="Name is required"
+            />
+        <CheckBox
+            android:id="@+id/remeber_me_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remeber me"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@id/password_edit_text"
+            app:layout_constraintEnd_toEndOf="@id/password_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/password_edit_text"
+            app:layout_constraintHorizontal_bias="0"
+            android:textColor="#8F9090"
+            />
+        <TextView
+            android:id="@+id/forget_password_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forget password ?"
+            android:textColor="#E76D24"
+            android:clickable="true"
+            app:layout_constraintTop_toTopOf="@id/remeber_me_check_box"
+            app:layout_constraintEnd_toEndOf="@id/password_edit_text"
+            app:layout_constraintBottom_toBottomOf="@id/remeber_me_check_box"
+            />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F2A11E"
+            android:src="@drawable/ic_arrow_right"
+            app:tint="@color/white"
+            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintEnd_toEndOf="@id/password_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/password_edit_text"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/new_member_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New member? "
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/floating_button" />
+
+        <TextView
+            android:id="@+id/register_now_text_veiw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Register now"
+            android:textColor="#E76D24"
+            app:layout_constraintStart_toEndOf="@id/new_member_text_view"
+            app:layout_constraintTop_toTopOf="@id/new_member_text_view"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

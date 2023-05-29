@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="days_array">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+
+    <string-array name="Government">
+        <item>Alexandria</item>
+        <item>Cairo</item>
+        <item>Dahab</item>
+        <item>Siwa</item>
+        <item>Portsaid</item>
+        <item>Sharm</item>
+        <item>Gouna</item>
+    </string-array>
+    <string-array name="days">
+        <item>sunday-friday</item>
+        <item>saturday-thursday</item>
+        <item>All days</item>
+    </string-array>
+    <string-array name="Category">
+        <item>Cafes and coffee shops</item>
+        <item>Restaurants </item>
+        <item>Shopping malls</item>
+        <item>Nightclubs and bars</item>
+        <item>Casinos</item>
+
+    </string-array>
+</resources>

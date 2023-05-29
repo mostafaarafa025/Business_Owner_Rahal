@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/back_arrow_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/place_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="28dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Place name "
+            android:textColor="#252525"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/place_name_edit_text"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#8F9090"
+            android:background="@drawable/custom_edit_text"
+            android:hint="place Name"
+            android:inputType=""
+            android:padding="12dp"
+            app:layout_constraintStart_toStartOf="@id/uploading_card"
+            app:layout_constraintTop_toBottomOf="@id/place_name" />
+
+        <TextView
+            android:id="@+id/upload_pdf_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Upload legal documents PDF"
+            android:textColor="#252525"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@id/place_name"
+            app:layout_constraintTop_toBottomOf="@id/place_name_edit_text" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/uploading_card"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/dotted_card_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upload_pdf_text_id">
+
+            <ImageView
+                android:id="@+id/icon_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/ic_file_upload"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <WebView
+                android:id="@+id/pdf_web_view"
+                android:layout_width="120dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="2dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@id/uploading_card"
+                app:layout_constraintStart_toStartOf="@id/uploading_card"
+                app:layout_constraintTop_toTopOf="@id/uploading_card" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="#E76D24"
+                android:text="Choose from device"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon_upload" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/write_description_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Write description"
+            android:textColor="#252525"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@id/upload_pdf_text_id"
+            app:layout_constraintTop_toBottomOf="@id/uploading_card" />
+
+        <EditText
+            android:id="@+id/description_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:gravity="start"
+            android:hint="What would you like people to know about your place..."
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/uploading_card"
+            app:layout_constraintStart_toStartOf="@id/uploading_card"
+            app:layout_constraintTop_toBottomOf="@id/write_description_text_id" />
+
+        <TextView
+            android:id="@+id/category_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Pick the category you belong to"
+            android:textColor="#252525"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@id/upload_pdf_text_id"
+            app:layout_constraintTop_toBottomOf="@id/description_edit_text" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/category_spinner_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_arrow_down"
+            app:layout_constraintStart_toStartOf="@id/description_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/category_text_id">
+
+            <AutoCompleteTextView
+                android:id="@+id/category_spinner_auto_complete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text"
+                android:inputType="none"
+                android:padding="14dp"
+                android:text="Category"
+                android:textColor="#8F9090" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/work_hours_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Pick work hours"
+            android:textColor="#252525"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@id/upload_pdf_text_id"
+            app:layout_constraintTop_toBottomOf="@id/category_spinner_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/work_hours_text_id"
+        android:text="from:"
+        android:textColor="#E76D24"
+        android:layout_marginStart="14dp"
+        android:id="@+id/text_from"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:id="@+id/edit_text_time_from"
+        app:layout_constraintStart_toEndOf="@id/text_from"
+        app:layout_constraintTop_toBottomOf="@id/work_hours_text_id"
+        android:textColor="@color/black"
+        android:hint="09:30 pm "
+        android:textStyle="bold"
+         android:backgroundTint="#C0C8C8"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/edit_text_time_from"
+            app:layout_constraintTop_toBottomOf="@id/work_hours_text_id"
+            android:text="to:"
+            android:textColor="#E76D24"
+            android:layout_marginStart="22dp"
+            android:id="@+id/text_to"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@id/text_to"
+            app:layout_constraintTop_toBottomOf="@id/work_hours_text_id"
+            android:hint="12:30 am "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:backgroundTint="#C0C8C8"
+            android:id="@+id/edit_text_time_to"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            />
+        <TextView
+            android:id="@+id/work_days_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Pick work days"
+            android:textColor="#252525"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@id/upload_pdf_text_id"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_time_from" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/days_spinner_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="200dp"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_down"
+            app:layout_constraintStart_toStartOf="@id/category_spinner_icon"
+            android:layout_marginStart="2dp"
+            app:layout_constraintTop_toBottomOf="@id/work_days_text_id"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/days_spinner_auto_complete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text"
+                android:inputType="none"
+                android:padding="14dp"
+                android:text="Days"
+                android:textColor="#8F9090" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="120dp"
+           android:backgroundTintMode="screen"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="25dp"
+            android:backgroundTint="#E76D24"
+            android:text="Submit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/days_spinner_icon" />
+
+        <TextView
+            android:id="@+id/already_member_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Already a member? "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/submit_button" />
+
+        <TextView
+            android:id="@+id/log_in_text_veiw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Log In"
+            android:textColor="#E76D24"
+            app:layout_constraintStart_toEndOf="@id/already_member_text_view"
+            app:layout_constraintTop_toTopOf="@id/already_member_text_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
