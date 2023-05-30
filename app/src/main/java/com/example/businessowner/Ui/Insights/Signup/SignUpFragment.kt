@@ -9,23 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.example.businessowner.Network.remote.HomeApi
 import com.example.businessowner.R
+import com.example.businessowner.Ui.Insights.viewmodel.AuthViewModel
 import com.example.businessowner.databinding.FragmentSignUpBinding
-import com.example.businessowner.di.Retrofit
-import com.example.businessowner.model.authentication.SignUpRequest
-import com.example.businessowner.model.authentication.SignUpResponse
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
-    lateinit var binding:FragmentSignUpBinding
+    lateinit var binding: FragmentSignUpBinding
+    private val authViewModel: AuthViewModel by viewModels()
     private lateinit var validEmailEditText: EditText
     private lateinit var phoneNumberEditText: EditText
     private lateinit var passwordEditText: EditText
@@ -35,11 +32,13 @@ class SignUpFragment : Fragment() {
     private lateinit var passwordErrorMessage: TextView
     private lateinit var verifyPasswordErrorMessage: TextView
     private lateinit var floatingButton: FloatingActionButton
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-    binding = FragmentSignUpBinding.inflate(inflater,container,false)
+        binding = FragmentSignUpBinding.inflate(inflater, container, false)
         initializeVariables()
         return binding.root
     }
@@ -58,56 +57,50 @@ class SignUpFragment : Fragment() {
         }
 
         floatingButton.setOnClickListener {
-            Log.e("kosomzatona","kosomk")
-//            if (signup()==true){
-//
-//                Log.e("kosomzatonatany","kosomktany")
-//
-//            }else   Log.e("kosomzatonatlata","kosomktlata")
-
-           signup()
-           // Navigation.findNavController(view).navigate(R.id.loginFragment)
+    signUp()
         }
+
     }
 
+    private fun signUp(){
+        val name = "tata"
+        val role= "user"
+        val email= validEmailEditText.text.toString()
+        val password=passwordEditText.text.toString()
+        val passwordConfirm=verifyPasswordEditText.text.toString()
+        authViewModel.signUp(name,email, password, passwordConfirm, role)
 
-    private fun signup() {
-        val role = "user"
-        val request = SignUpRequest()
-
-
-        request.email = validEmailEditText.text.toString().trim()
-        request.password = passwordEditText.text.toString().trim()
-        request.passwordConfirm = verifyPasswordEditText.text.toString().trim()
-        request.role = role
-
-        Log.e("tata",request.email.toString())
-        val retrofit = Retrofit().getRetrofitClientInstance().create(HomeApi::class.java)
-        retrofit.signup(request).enqueue(object: Callback<SignUpResponse>{
-            override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
-                val user = response.body()
-
-                    Log.e("sucess", validEmailEditText.text.toString())
-                  //  Log.e("sucess", user?.data?.user?.name.toString())
-//                    Log.e("sucess", user?.data?.user?.email.toString())
-//                    Log.e("sucess", user?.data?.user?.password.toString())
-//                    Log.e("sucess", user?.data?.user?.role.toString())
-//                    Toast.makeText(activity,"Register sucess", Toast.LENGTH_LONG).show()
-
-
+        authViewModel.signUpResponse.observe(viewLifecycleOwner, { signUpResponse ->
+            signUpResponse?.let {
+                Log.d("SignUpResponse", it.toString())
+              Log.e("tata",it.token.toString())
             }
-
-            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
-                Log.e("Error" ,t.message.toString())
-                Log.e("sucess", validEmailEditText.text.toString())
-                Toast.makeText(activity,"Register Failed",Toast.LENGTH_LONG).show()
-
-            }
-
         })
     }
 
-    private fun initializeVariables(){
+//
+//    private fun signUp() {
+//        val role = "user"
+//        authViewModel.signUpResponse.observe(viewLifecycleOwner) {
+//
+//            val request = SignUpRequest(
+//                validEmailEditText.text.toString().trim(),
+//                passwordEditText.text.toString().trim(),
+//                verifyPasswordEditText.text.toString().trim(),
+//                "user")
+//
+//            authViewModel.signUP(request)
+//            Log.e("okay",request.email.toString())
+////           request.email = validEmailEditText.text.toString().trim()
+////
+////            request.password = passwordEditText.text.toString().trim()
+//
+//
+//        }
+//    }
+
+
+    private fun initializeVariables() {
         validEmailEditText = binding.validEmailEditText
         validEmailErrorMessage = binding.errorMessageValidEmail
 
@@ -124,27 +117,27 @@ class SignUpFragment : Fragment() {
     }
 
 
-    private fun showErrorMessage(editText: EditText, textView: TextView, errorMessage: String){
+    private fun showErrorMessage(editText: EditText, textView: TextView, errorMessage: String) {
         editText.error = errorMessage
         textView.text = errorMessage
     }
 
 
-
-    private fun validateEmail(){
+    private fun validateEmail() {
         val errorMessage = "Enter a valid email"
 
         validEmailEditText.doAfterTextChanged {
             if (validEmailEditText.text.toString().isNotEmpty() &&
-                Patterns.EMAIL_ADDRESS.matcher(validEmailEditText.text.toString()).matches()) {
+                Patterns.EMAIL_ADDRESS.matcher(validEmailEditText.text.toString()).matches()
+            ) {
                 validEmailErrorMessage.text = ""
-            }else {
-                showErrorMessage(validEmailEditText,validEmailErrorMessage,errorMessage)
+            } else {
+                showErrorMessage(validEmailEditText, validEmailErrorMessage, errorMessage)
             }
         }
     }
 
-    private fun validatePassword(){
+    private fun validatePassword() {
         val errorMessage = "password should contain a-z , A-z , 0-9"
         val uppercase: Pattern = Pattern.compile("[A-Z]")
         val lowercase: Pattern = Pattern.compile("[a-z]")
@@ -152,42 +145,42 @@ class SignUpFragment : Fragment() {
 
         passwordEditText.doAfterTextChanged {
             // if lowercase character is not present
-            if(!lowercase.matcher(passwordEditText.text.toString()).find()){
-                showErrorMessage(passwordEditText,passwordErrorMessage,errorMessage)
-            }else{
+            if (!lowercase.matcher(passwordEditText.text.toString()).find()) {
+                showErrorMessage(passwordEditText, passwordErrorMessage, errorMessage)
+            } else {
                 passwordErrorMessage.text = ""
             }
 
             // if uppercase character is not present
-            if (!uppercase.matcher(passwordEditText.text.toString()).find()){
-                showErrorMessage(passwordEditText,passwordErrorMessage,errorMessage)
-            }else{
+            if (!uppercase.matcher(passwordEditText.text.toString()).find()) {
+                showErrorMessage(passwordEditText, passwordErrorMessage, errorMessage)
+            } else {
                 passwordErrorMessage.text = ""
             }
 
             // if digit is not present
-            if (!digit.matcher(passwordEditText.text.toString()).find()){
-                showErrorMessage(passwordEditText,passwordErrorMessage,errorMessage)
-            }else{
+            if (!digit.matcher(passwordEditText.text.toString()).find()) {
+                showErrorMessage(passwordEditText, passwordErrorMessage, errorMessage)
+            } else {
                 passwordErrorMessage.text = ""
             }
 
             // if password length is less than 8
-            if (passwordEditText.text.toString().length < 8){
-                showErrorMessage(passwordEditText,passwordErrorMessage,errorMessage)
-            }else{
+            if (passwordEditText.text.toString().length < 8) {
+                showErrorMessage(passwordEditText, passwordErrorMessage, errorMessage)
+            } else {
                 passwordErrorMessage.text = ""
             }
         }
     }
 
-    private fun validateVerifyPassword(){
+    private fun validateVerifyPassword() {
         val errorMessage = "Rematch password"
         verifyPasswordEditText.doAfterTextChanged {
-            if (passwordEditText.text.toString() == verifyPasswordEditText.text.toString() ){
+            if (passwordEditText.text.toString() == verifyPasswordEditText.text.toString()) {
                 verifyPasswordErrorMessage.text = ""
-            }else {
-                showErrorMessage(verifyPasswordEditText,verifyPasswordErrorMessage,errorMessage)
+            } else {
+                showErrorMessage(verifyPasswordEditText, verifyPasswordErrorMessage, errorMessage)
             }
         }
     }

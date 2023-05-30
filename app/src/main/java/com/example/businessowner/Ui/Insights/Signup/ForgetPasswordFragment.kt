@@ -10,7 +10,9 @@ import android.widget.ImageView
 import androidx.navigation.Navigation
 import com.example.businessowner.R
 import com.example.businessowner.databinding.FragmentForgetPasswordBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ForgetPasswordFragment : Fragment() {
     lateinit var binding:FragmentForgetPasswordBinding
     private lateinit var sendMailButton: Button

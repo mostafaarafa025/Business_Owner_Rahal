@@ -9,17 +9,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-//
-//@InstallIn(SingletonComponent::class)
-//@Module
-//object AppModule {
-//    @Provides
-//    @Singleton
-//    fun provideApi(): HomeApi =
-//        Retrofit.Builder()
-//            .baseUrl("https://192.168.1.3:3000/api/")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//            .create(HomeApi::class.java)
-//
-//}
+
+@InstallIn(SingletonComponent::class)
+@Module
+object AppModule {
+    @Provides
+    @Singleton
+    fun provideApi(): HomeApi =
+        Retrofit.Builder()
+            .baseUrl("http://192.168.1.32:3008/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(HomeApi::class.java)
+
+}

@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.businessowner.R
 import com.example.businessowner.databinding.FragmentProfileBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     lateinit var binding: FragmentProfileBinding

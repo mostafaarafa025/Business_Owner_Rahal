@@ -14,7 +14,9 @@ import android.widget.ImageView
 import androidx.navigation.Navigation
 import com.example.businessowner.R
 import com.example.businessowner.databinding.FragmentVerificationCodeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class VerificationCodeFragment : Fragment(),TextWatcher {
     lateinit var binding:FragmentVerificationCodeBinding
     private lateinit var backArrowButton: ImageView

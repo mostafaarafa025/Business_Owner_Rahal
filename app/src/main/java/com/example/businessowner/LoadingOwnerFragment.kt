@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.businessowner.Ui.Insights.insights.InsightsActivity
 import com.example.businessowner.databinding.FragmentLoadingOwnerBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoadingOwnerFragment : Fragment() {
     lateinit var binding:FragmentLoadingOwnerBinding
     override fun onCreateView(

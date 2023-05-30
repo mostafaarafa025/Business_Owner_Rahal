@@ -12,8 +12,9 @@ import android.widget.ArrayAdapter
 import androidx.navigation.Navigation
 import com.example.businessowner.R
 import com.example.businessowner.databinding.FragmentSignUp1Binding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SignUp1 : Fragment() {
 lateinit var binding: FragmentSignUp1Binding
 

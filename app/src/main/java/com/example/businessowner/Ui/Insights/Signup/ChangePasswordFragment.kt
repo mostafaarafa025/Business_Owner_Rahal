@@ -11,9 +11,10 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.Navigation
 import com.example.businessowner.R
 import com.example.businessowner.databinding.FragmentChangePasswordBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
-
+@AndroidEntryPoint
 class ChangePasswordFragment : Fragment() {
   lateinit var binding:FragmentChangePasswordBinding
     private lateinit var enterPasswordEditText: EditText

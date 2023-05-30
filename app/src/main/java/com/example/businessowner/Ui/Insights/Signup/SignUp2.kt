@@ -20,10 +20,11 @@ import com.example.businessowner.R
 import com.example.businessowner.databinding.FragmentSignUp2Binding
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-
+@AndroidEntryPoint
 class SignUp2 : Fragment() {
    lateinit var binding: FragmentSignUp2Binding
     val ADD_PDF_REQUEST_CODE = 102

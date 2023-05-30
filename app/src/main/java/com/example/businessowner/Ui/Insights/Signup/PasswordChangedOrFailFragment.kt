@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.businessowner.databinding.FragmentPasswordChangedOrFailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PasswordChangedOrFailFragment : Fragment() {
     lateinit var binding:FragmentPasswordChangedOrFailBinding
     override fun onCreateView(

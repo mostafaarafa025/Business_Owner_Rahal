@@ -8,7 +8,9 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.businessowner.R
 import com.example.businessowner.databinding.ActivityInsightsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InsightsActivity : AppCompatActivity() {
     lateinit var binding:ActivityInsightsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
