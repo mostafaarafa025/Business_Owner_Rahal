@@ -1,6 +1,8 @@
 package com.example.businessowner.Ui.Insights.Signup
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,10 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.businessowner.R
+import com.example.businessowner.Ui.Insights.viewmodel.AuthViewModel
 import com.example.businessowner.databinding.FragmentLoginBinding
+import com.example.businessowner.model.authentication.LoginRequest
+import com.example.businessowner.model.authentication.SignUpRequest
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +26,7 @@ class LoginFragment : Fragment() {
 lateinit var binding:FragmentLoginBinding
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
+    private val authViewModel: AuthViewModel by viewModels()
     private lateinit var emailErrorMessage: TextView
     private lateinit var passwordErrorMessage: TextView
     override fun onCreateView(
@@ -45,37 +53,32 @@ lateinit var binding:FragmentLoginBinding
         }
 
         binding.floatingButton.setOnClickListener    {
-          //  login()
-        Navigation.findNavController(view).navigate(R.id.signUp1)
+            login()
         }
     }
+   private fun login(){
 
-//    private fun login() {
-//        val request = UserRequest()
-//        request.email = emailEditText.text.toString().trim()
-//        request.password = passwordEditText.text.toString().trim()
-//
-//        val retrofit = Retrofit().getRetrofitClientInstance().create(HomeApi::class.java)
-//        retrofit.login(request).enqueue(object: Callback<SignupResponse> {
-//            override fun onResponse(call: Call<SignupResponse>, response: Response<SignupResponse>) {
-//                val user = response.body()
-//                if (response.code() == 201 && user?.data?.user?.role.toString() == "user" ) {
-//                    Log.e("sucess", user?.token.toString())
-//                    Log.e("sucess", user?.data?.user?.role.toString())
-//                    Toast.makeText(activity,"login sucess", Toast.LENGTH_LONG).show()
-//                        val intent=Intent(requireContext(),SignUp1::class.java)
-//                    startActivity(intent)
-//                }else {
-//                    Toast.makeText(activity,"invalid mail or password", Toast.LENGTH_LONG).show()
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
-//                Log.e("Error" ,t.message.toString())
-//            }
-//
-//        })
-//    }
+       val email= emailEditText.text.toString()
+       val password=passwordEditText.text.toString()
+       val loginRequest = LoginRequest().apply {
+           this.email = email
+           this.password = password
+       }
+       authViewModel.login(loginRequest)
+       authViewModel.loginResponse.observe(viewLifecycleOwner){ data->
+           if (data!=null){
+               data?.let {
+                   Log.e("success",data.data.user.name.toString())
+                   Log.e("success",data.data.user.email.toString())
+                   Log.e("success",data.data.user.id.toString())
+                   Log.e("success",data.data.user.password.toString())
+                   Log.e("success",data.data.user.role.toString())
+                   Log.e("success",data.token.toString())
+               }
+               view?.let { Navigation.findNavController(it).navigate(R.id.signUp1) }
+           }else Toast.makeText(activity, "Login Failed ", Toast.LENGTH_LONG).show()
+       }
+   }
 
     private fun initializeVariables(){
         emailEditText = binding.emailEditText

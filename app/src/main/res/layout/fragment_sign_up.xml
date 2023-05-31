@@ -1,193 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Ui.Insights.Signup.SignUpFragment">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/signup_background">
+        android:layout_height="wrap_content"
+        tools:context=".Ui.Insights.Signup.SignUpFragment">
 
-        <ImageView
-            android:id="@+id/image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/signup_logo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-        <ImageView
-            android:id="@+id/back_arrow_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_back"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-        <TextView
-            android:id="@+id/get_started_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Get Started"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#252525"
-            app:layout_constraintStart_toStartOf="@id/image_view"
-            app:layout_constraintEnd_toEndOf="@id/image_view"
-            app:layout_constraintTop_toBottomOf="@id/image_view"
-            />
-        <TextView
-            android:id="@+id/free_account_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="by creating a free account."
-            android:textColor="#252525"
-            app:layout_constraintStart_toStartOf="@id/get_started_text_view"
-            app:layout_constraintEnd_toEndOf="@id/get_started_text_view"
-            app:layout_constraintTop_toBottomOf="@id/get_started_text_view"
-            />
-        <EditText
-            android:id="@+id/valid_email_edit_text"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginTop="24dp"
-            android:inputType="textEmailAddress"
-            android:hint="Valid email"
-            android:padding="12dp"
-            android:background="@drawable/custom_edit_text"
-            android:drawableEnd="@drawable/ic_email"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/free_account_text_view"/>
-        <TextView
-            android:id="@+id/error_message_valid_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0404"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="@id/valid_email_edit_text"
-            app:layout_constraintTop_toBottomOf="@id/valid_email_edit_text"
-            tools:text="Name is required"
-            />
-        <EditText
-            android:id="@+id/phone_number_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:inputType="phone"
-            android:hint="Phone number"
-            android:padding="12dp"
-            android:background="@drawable/custom_edit_text"
-            android:drawableEnd="@drawable/ic_phone"
-            app:layout_constraintStart_toStartOf="@id/valid_email_edit_text"
-            app:layout_constraintEnd_toEndOf="@id/valid_email_edit_text"
-            app:layout_constraintTop_toBottomOf="@id/valid_email_edit_text"/>
-        <TextView
-            android:id="@+id/error_message_phone_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0404"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="@id/phone_number_edit_text"
-            app:layout_constraintTop_toBottomOf="@id/phone_number_edit_text"
-            tools:text="Name is required"
-            />
-        <EditText
-            android:id="@+id/password_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:inputType="textPassword"
-            android:hint="Password"
-            android:padding="12dp"
-            android:background="@drawable/custom_edit_text"
-            android:drawableEnd="@drawable/ic_password"
-            app:layout_constraintStart_toStartOf="@id/valid_email_edit_text"
-            app:layout_constraintEnd_toEndOf="@id/valid_email_edit_text"
-            app:layout_constraintTop_toBottomOf="@id/phone_number_edit_text"/>
-        <TextView
-            android:id="@+id/error_message_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0404"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="@id/password_edit_text"
-            app:layout_constraintTop_toBottomOf="@id/password_edit_text"
-            tools:text="Name is required"
-            />
-        <EditText
-            android:id="@+id/verify_password_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:inputType="textPassword"
-            android:hint="Verify Password"
-            android:padding="12dp"
-            android:shadowDx="@integer/material_motion_duration_long_1"
-            android:background="@drawable/custom_edit_text"
-            android:drawableEnd="@drawable/ic_password"
-            app:layout_constraintStart_toStartOf="@id/valid_email_edit_text"
-            app:layout_constraintEnd_toEndOf="@id/valid_email_edit_text"
-            app:layout_constraintTop_toBottomOf="@id/password_edit_text"/>
-        <TextView
-            android:id="@+id/error_message_password_verify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0404"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="@id/verify_password_edit_text"
-            app:layout_constraintTop_toBottomOf="@id/verify_password_edit_text"
-            tools:text="Name is required"
-            />
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@id/verify_password_edit_text"
-            app:layout_constraintEnd_toEndOf="@id/verify_password_edit_text"
-            app:layout_constraintTop_toBottomOf="@id/verify_password_edit_text"
-            android:text="By checking the box you agree to our terms and conditions"
-            />
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floating_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#F2A11E"
-            android:src="@drawable/ic_arrow_right"
-            app:tint="@color/white"
-            app:layout_constraintVertical_bias="0.4"
-            app:layout_constraintEnd_toEndOf="@id/verify_password_edit_text"
-            app:layout_constraintTop_toBottomOf="@id/verify_password_edit_text"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-        <TextView
-            android:id="@+id/already_member_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Already a member? "
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/floating_button"
-            />
-        <TextView
-            android:id="@+id/log_in_text_veiw"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Log In"
-            android:textColor="#E76D24"
-            app:layout_constraintStart_toEndOf="@id/already_member_text_view"
-            app:layout_constraintTop_toTopOf="@id/already_member_text_view"
-            />
+            android:layout_height="match_parent"
+            android:background="@drawable/signup_background">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/signup_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/back_arrow_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/get_started_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Started"
+                android:textColor="#252525"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/image_view"
+                app:layout_constraintStart_toStartOf="@id/image_view"
+                app:layout_constraintTop_toBottomOf="@id/image_view" />
+
+            <TextView
+                android:id="@+id/free_account_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="by creating a free account."
+                android:textColor="#252525"
+                app:layout_constraintEnd_toEndOf="@id/get_started_text_view"
+                app:layout_constraintStart_toStartOf="@id/get_started_text_view"
+                app:layout_constraintTop_toBottomOf="@id/get_started_text_view" />
+
+            <EditText
+                android:id="@+id/full_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/custom_edit_text"
+                android:drawableEnd="@drawable/ic_full_name"
+                android:hint="Full Name"
+                android:inputType="textEmailAddress"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/free_account_text_view" />
+
+            <TextView
+                android:id="@+id/error_message_full_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="#FF0404"
+                app:layout_constraintStart_toStartOf="@id/valid_email_edit_text"
+                app:layout_constraintTop_toBottomOf="@id/full_name_edit_text"
+                tools:text="Name is required" />
+
+            <EditText
+                android:id="@+id/valid_email_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/custom_edit_text"
+                android:drawableEnd="@drawable/ic_email"
+                android:hint="Valid email"
+                android:inputType="textEmailAddress"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/full_name_edit_text" />
+
+            <TextView
+                android:id="@+id/error_message_valid_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="#FF0404"
+                app:layout_constraintStart_toStartOf="@id/valid_email_edit_text"
+                app:layout_constraintTop_toBottomOf="@id/valid_email_edit_text"
+                tools:text="Name is required" />
+
+            <EditText
+                android:id="@+id/phone_number_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/custom_edit_text"
+                android:drawableEnd="@drawable/ic_phone"
+                android:hint="Phone number"
+                android:inputType="phone"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="@id/valid_email_edit_text"
+                app:layout_constraintStart_toStartOf="@id/valid_email_edit_text"
+                app:layout_constraintTop_toBottomOf="@id/valid_email_edit_text" />
+
+            <TextView
+                android:id="@+id/error_message_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="#FF0404"
+                app:layout_constraintStart_toStartOf="@id/phone_number_edit_text"
+                app:layout_constraintTop_toBottomOf="@id/phone_number_edit_text"
+                tools:text="Name is required" />
+
+            <EditText
+                android:id="@+id/password_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/custom_edit_text"
+                android:drawableEnd="@drawable/ic_password"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="@id/valid_email_edit_text"
+                app:layout_constraintStart_toStartOf="@id/valid_email_edit_text"
+                app:layout_constraintTop_toBottomOf="@id/phone_number_edit_text" />
+
+            <TextView
+                android:id="@+id/error_message_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="#FF0404"
+                app:layout_constraintStart_toStartOf="@id/password_edit_text"
+                app:layout_constraintTop_toBottomOf="@id/password_edit_text"
+                tools:text="Name is required" />
+
+            <EditText
+                android:id="@+id/verify_password_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/custom_edit_text"
+                android:drawableEnd="@drawable/ic_password"
+                android:hint="Verify Password"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:shadowDx="@integer/material_motion_duration_long_1"
+                app:layout_constraintEnd_toEndOf="@id/valid_email_edit_text"
+                app:layout_constraintStart_toStartOf="@id/valid_email_edit_text"
+                app:layout_constraintTop_toBottomOf="@id/password_edit_text" />
+
+            <TextView
+                android:id="@+id/error_message_password_verify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="#FF0404"
+                app:layout_constraintStart_toStartOf="@id/verify_password_edit_text"
+                app:layout_constraintTop_toBottomOf="@id/verify_password_edit_text"
+                tools:text="Name is required" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="By checking the box you agree to our terms and conditions"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@id/verify_password_edit_text"
+                app:layout_constraintStart_toStartOf="@id/verify_password_edit_text"
+                app:layout_constraintTop_toBottomOf="@id/verify_password_edit_text" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floating_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#F2A11E"
+                android:layout_marginTop="34dp"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/verify_password_edit_text"
+                app:layout_constraintTop_toBottomOf="@id/verify_password_edit_text"
+                app:layout_constraintVertical_bias="0.4"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/already_member_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already a member? "
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/floating_button" />
+
+            <TextView
+                android:id="@+id/log_in_text_veiw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Log In"
+                android:textColor="#E76D24"
+                app:layout_constraintStart_toEndOf="@id/already_member_text_view"
+                app:layout_constraintTop_toTopOf="@id/already_member_text_view" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</FrameLayout>
+    </FrameLayout>
+
+</ScrollView>

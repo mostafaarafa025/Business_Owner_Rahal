@@ -9,12 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.businessowner.R
 import com.example.businessowner.Ui.Insights.viewmodel.AuthViewModel
 import com.example.businessowner.databinding.FragmentSignUpBinding
+import com.example.businessowner.model.authentication.SignUpRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
@@ -32,6 +35,8 @@ class SignUpFragment : Fragment() {
     private lateinit var passwordErrorMessage: TextView
     private lateinit var verifyPasswordErrorMessage: TextView
     private lateinit var floatingButton: FloatingActionButton
+    private lateinit var fullNameEditText:EditText
+    private lateinit var fullNameErrorMessage:TextView
 
 
     override fun onCreateView(
@@ -45,6 +50,7 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        validateFullName()
         validateEmail()
         validatePassword()
         validateVerifyPassword()
@@ -63,44 +69,39 @@ class SignUpFragment : Fragment() {
     }
 
     private fun signUp(){
-        val name = "tata"
-        val role= "user"
+        val name=fullNameEditText.text.toString()
         val email= validEmailEditText.text.toString()
         val password=passwordEditText.text.toString()
         val passwordConfirm=verifyPasswordEditText.text.toString()
-        authViewModel.signUp(name,email, password, passwordConfirm, role)
-
-        authViewModel.signUpResponse.observe(viewLifecycleOwner, { signUpResponse ->
-            signUpResponse?.let {
-                Log.d("SignUpResponse", it.toString())
-              Log.e("tata",it.token.toString())
+        val role= "business_owner"
+        val signUpRequest = SignUpRequest().apply {
+            this.name=name
+            this.email = email
+            this.password = password
+            this.passwordConfirm = passwordConfirm
+            this.role = role
+        }
+        authViewModel.signUp(signUpRequest)
+        authViewModel.signUpResponse.observe(viewLifecycleOwner){ it->
+            if (it!=null){
+                it?.let {
+                    Log.e("success",it.data.user.name.toString())
+                    Log.e("success",it.data.user.email.toString())
+                    Log.e("success",it.data.user.password.toString())
+                    Log.e("success",it.data.user.role.toString())
+                    Log.e("success",it.token.toString())
+                }
+                Toast.makeText(activity, "Register success", Toast.LENGTH_LONG).show()
             }
-        })
+        }
+
+
     }
 
-//
-//    private fun signUp() {
-//        val role = "user"
-//        authViewModel.signUpResponse.observe(viewLifecycleOwner) {
-//
-//            val request = SignUpRequest(
-//                validEmailEditText.text.toString().trim(),
-//                passwordEditText.text.toString().trim(),
-//                verifyPasswordEditText.text.toString().trim(),
-//                "user")
-//
-//            authViewModel.signUP(request)
-//            Log.e("okay",request.email.toString())
-////           request.email = validEmailEditText.text.toString().trim()
-////
-////            request.password = passwordEditText.text.toString().trim()
-//
-//
-//        }
-//    }
-
-
     private fun initializeVariables() {
+        fullNameEditText = binding.fullNameEditText
+        fullNameErrorMessage = binding.errorMessageFullName
+
         validEmailEditText = binding.validEmailEditText
         validEmailErrorMessage = binding.errorMessageValidEmail
 
@@ -120,6 +121,19 @@ class SignUpFragment : Fragment() {
     private fun showErrorMessage(editText: EditText, textView: TextView, errorMessage: String) {
         editText.error = errorMessage
         textView.text = errorMessage
+    }
+
+    private fun validateFullName(){
+        val errorMessage = "Name is required"
+
+        fullNameEditText.doOnTextChanged { _, _, _, _ ->
+            fullNameErrorMessage.text = ""
+        }
+        fullNameEditText.doAfterTextChanged {
+            if (fullNameEditText.text.toString() == ""){
+                showErrorMessage(fullNameEditText,fullNameErrorMessage, errorMessage)
+            }
+        }
     }
 
 

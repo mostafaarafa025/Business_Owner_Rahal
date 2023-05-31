@@ -1,5 +1,6 @@
 package com.example.businessowner.Network.remote
 
+import com.example.businessowner.model.authentication.LoginRequest
 import com.example.businessowner.model.authentication.SignUpRequest
 import com.example.businessowner.model.authentication.SignUpResponse
 import retrofit2.Response
@@ -11,12 +12,14 @@ interface HomeApi {
   suspend  fun signup(
         @Body registerUserRequest: SignUpRequest
     ): Response<SignUpResponse>
+
+    @POST("users/login")
+   suspend fun login(
+        @Body userRequest: LoginRequest
+    ): Response<SignUpResponse>
+
 }
-//    @POST("users/login")
-//    fun login(
-//        @Body userRequest: UserRequest
-//    ): Call<SignupResponse>
-//
+
 
 //    @POST("users/forgetpassword")
 //    fun forgetPassword(
