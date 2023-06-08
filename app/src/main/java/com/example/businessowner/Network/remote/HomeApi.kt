@@ -1,5 +1,9 @@
 package com.example.businessowner.Network.remote
 
+import com.example.businessowner.model.addingHotel.HotelRequest
+import com.example.businessowner.model.addingHotel.HotelResponse
+import com.example.businessowner.model.addingRestaurant.RestaurantRequest
+import com.example.businessowner.model.addingRestaurant.RestaurantResponse
 import com.example.businessowner.model.authentication.LoginRequest
 import com.example.businessowner.model.authentication.SignUpRequest
 import com.example.businessowner.model.authentication.SignUpResponse
@@ -17,6 +21,16 @@ interface HomeApi {
    suspend fun login(
         @Body userRequest: LoginRequest
     ): Response<SignUpResponse>
+
+    @POST("hotels")
+    suspend fun addingPlace(
+        @Body placeRequest: HotelRequest
+    ):Response<HotelResponse>
+
+ @POST("restaurants")
+    suspend fun addingRestaurant(
+        @Body restaurantRequest: RestaurantRequest
+    ):Response<RestaurantResponse>
 
 }
 

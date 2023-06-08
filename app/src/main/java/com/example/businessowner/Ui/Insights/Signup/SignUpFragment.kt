@@ -92,7 +92,8 @@ class SignUpFragment : Fragment() {
                     Log.e("success",it.token.toString())
                 }
                 Toast.makeText(activity, "Register success", Toast.LENGTH_LONG).show()
-            }
+            }else Toast.makeText(activity, "Register failed", Toast.LENGTH_LONG).show()
+
         }
 
 

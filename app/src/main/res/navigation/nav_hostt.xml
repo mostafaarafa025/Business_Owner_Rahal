@@ -11,7 +11,7 @@
         android:label="fragment_sign_up1"
         tools:layout="@layout/fragment_sign_up1" >
         <action
-            android:id="@+id/action_signUp1_to_signUp2"
+            android:id="@+id/action_from_SignUp1_toSignUp2"
             app:destination="@id/signUp2" />
     </fragment>
     <fragment

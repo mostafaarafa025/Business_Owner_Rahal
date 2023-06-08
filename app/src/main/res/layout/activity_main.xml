@@ -19,5 +19,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        app:navGraph="@navigation/nav_host_signup" />
+        app:navGraph="@navigation/nav_hostt" />
 </androidx.constraintlayout.widget.ConstraintLayout>
