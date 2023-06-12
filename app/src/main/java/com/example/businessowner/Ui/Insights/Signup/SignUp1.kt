@@ -26,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignUp1 : Fragment() {
     lateinit var binding: FragmentSignUp1Binding
     private val viewModel: PlaceViewModel by viewModels()
+    val imageUrls = mutableListOf<String>()
     private var coordinatesList: List<Double> = listOf(2.5, 45.2)
     val images = mutableListOf<Uri>()
     companion object {
@@ -46,8 +47,6 @@ return binding.root
 
         binding.floatingButton.setOnClickListener {
           sendData()
-           // addRestaurant()
-           // addHotel()
         }
         val governments=resources.getStringArray(R.array.Government)
         val arrayAdapter=ArrayAdapter(requireContext(), R.layout.dropdown_item,governments)
@@ -62,39 +61,6 @@ return binding.root
 
     }
 
-
-//    private fun addRestaurant(){
-//        val restaurantRequest=RestaurantRequest().apply {
-//            this.phone="0112235654"
-//            this.name="tmmmm"
-//            location = LocationRestaurant().apply {
-//                coordinates = coordinatesList
-//            }
-//        }
-//        viewModel.addRestaurant(restaurantRequest)
-//        viewModel.restaurantResponse.observe(viewLifecycleOwner) { restaurantResponse ->
-//            // Handle the restaurantResponse here
-//            Log.d("RestaurantFragment", "Response: $restaurantResponse")
-//        }
-//    }
-//
-//   private fun addHotel(){
-//       val hotelRequest=HotelRequest().apply {
-//           this.name="tgjjjj"
-//           this.phone="010174471479665"
-//           this.city="tanta"
-//           this.address="miami"
-//           this.rating="2.5"
-//           this.hotelClass=5
-//           this.location=LocationHotel().apply {
-//               coordinates=coordinatesList
-//           }
-//       }
-//       viewModel.addPlace(hotelRequest)
-//       viewModel.hotelResponse.observe(viewLifecycleOwner){
-//           Log.d("RestaurantFragment", "Response: $it")
-//       }
-//   }
 
     private fun takeCoordinates(){
     val coordinatesText = binding.mapLocationEditText.text.toString()
@@ -112,6 +78,7 @@ return binding.root
             var bundle= Bundle().apply {
                putString("government",government)
          putString("fullAddress",fullAddress)
+                putStringArrayList("imageUrls", ArrayList(imageUrls))
         putDoubleArray("coordinates", coordinatesList.toDoubleArray())
             }
         val fragment=SignUp2()
@@ -143,6 +110,10 @@ return binding.root
             } else if (data?.data != null) {
                 val imageUri = data.data!!
                 images.add(imageUri)
+            }
+            for (imageUri in images) {
+                val imageUrl = imageUri.toString()
+                imageUrls.add(imageUrl)
             }
         }
        binding.imageRecyclerView.adapter = PhotoAdapter(images)

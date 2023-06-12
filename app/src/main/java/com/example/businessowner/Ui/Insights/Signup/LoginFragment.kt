@@ -1,5 +1,6 @@
 package com.example.businessowner.Ui.Insights.Signup
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -70,15 +71,20 @@ lateinit var binding:FragmentLoginBinding
                data?.let {
                    Log.e("success",data.data.user.name.toString())
                    Log.e("success",data.data.user.email.toString())
-                   Log.e("success",data.data.user.id.toString())
+                   Log.e("id",data.data.user.id.toString())
                    Log.e("success",data.data.user.password.toString())
-                   Log.e("success",data.data.user.role.toString())
-                   Log.e("success",data.token.toString())
+                   Log.e("role",data.data.user.role.toString())
+                   Log.e("token",data.token.toString())
+
+
                }
                view?.let { Navigation.findNavController(it).navigate(R.id.signUp1) }
            }else Toast.makeText(activity, "Login Failed ", Toast.LENGTH_LONG).show()
        }
    }
+
+
+
 
     private fun initializeVariables(){
         emailEditText = binding.emailEditText

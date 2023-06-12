@@ -85,11 +85,11 @@ class SignUpFragment : Fragment() {
         authViewModel.signUpResponse.observe(viewLifecycleOwner){ it->
             if (it!=null){
                 it?.let {
-                    Log.e("success",it.data.user.name.toString())
-                    Log.e("success",it.data.user.email.toString())
-                    Log.e("success",it.data.user.password.toString())
-                    Log.e("success",it.data.user.role.toString())
-                    Log.e("success",it.token.toString())
+                    Log.e("success",it.data.user.name)
+                    Log.e("success",it.data.user.email)
+                    Log.e("success",it.data.user.password)
+                    Log.e("success",it.data.user.role)
+                    Log.e("token",it.token.toString())
                 }
                 Toast.makeText(activity, "Register success", Toast.LENGTH_LONG).show()
             }else Toast.makeText(activity, "Register failed", Toast.LENGTH_LONG).show()

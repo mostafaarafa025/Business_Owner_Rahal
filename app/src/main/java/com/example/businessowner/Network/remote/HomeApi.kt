@@ -9,6 +9,9 @@ import com.example.businessowner.model.authentication.SignUpRequest
 import com.example.businessowner.model.authentication.SignUpResponse
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface HomeApi {
@@ -24,14 +27,24 @@ interface HomeApi {
 
     @POST("hotels")
     suspend fun addingPlace(
-        @Body placeRequest: HotelRequest
+        @Body placeRequest: HotelRequest,
+        @Header("Authorization") token: String
+
     ):Response<HotelResponse>
+
 
  @POST("restaurants")
     suspend fun addingRestaurant(
-        @Body restaurantRequest: RestaurantRequest
+        @Body restaurantRequest: RestaurantRequest,
+        @Header("Authorization") token: String
     ):Response<RestaurantResponse>
 
+
+
+//    @GET("hotels/{id}")
+//    suspend fun getRestaurantRequest(
+//
+//    )
 }
 
 
