@@ -1,5 +1,7 @@
 package com.example.businessowner.Network.remote
 
+import com.example.businessowner.model.Respond.Hotel.HotelRequestResponse
+import com.example.businessowner.model.Respond.Restaurant.RestaurantRequestResponse
 import com.example.businessowner.model.addingHotel.HotelRequest
 import com.example.businessowner.model.addingHotel.HotelResponse
 import com.example.businessowner.model.addingRestaurant.RestaurantRequest
@@ -11,8 +13,8 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface HomeApi {
     @POST("users/signup")
@@ -41,11 +43,19 @@ interface HomeApi {
 
 
 
-//    @GET("hotels/{id}")
-//    suspend fun getRestaurantRequest(
-//
-//    )
+
+    @GET("hotels/{id}")
+    suspend fun getHotelRequest(
+    @Path("id") id:String
+    ):Response<HotelRequestResponse>
+
+    @GET("restaurants/{idRes}")
+    suspend fun getRestaurantRequest(
+        @Path("idRes") id:String
+    ):Response<RestaurantRequestResponse>
 }
+
+
 
 
 //    @POST("users/forgetpassword")

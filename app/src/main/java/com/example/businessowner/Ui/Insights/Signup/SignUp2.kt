@@ -1,5 +1,6 @@
 package com.example.businessowner.Ui.Insights.Signup
 
+import android.content.ContentUris
 import android.os.Bundle
 import android.text.format.DateFormat.is24HourFormat
 import android.util.Log
@@ -11,7 +12,9 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.businessowner.LoadingOwnerFragment
 import com.example.businessowner.R
 import com.example.businessowner.databinding.FragmentSignUp2Binding
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -24,6 +27,11 @@ import com.example.businessowner.model.addingHotel.HotelRequest
 import com.example.businessowner.model.addingHotel.LocationHotel
 import com.example.businessowner.model.addingRestaurant.LocationRestaurant
 import com.example.businessowner.model.addingRestaurant.RestaurantRequest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 class SignUp2 : Fragment() {
     lateinit var binding: FragmentSignUp2Binding
@@ -37,6 +45,8 @@ class SignUp2 : Fragment() {
     private var coordinatesList: List<Double> = emptyList()
     private var government: String = ""
    private var placeName: String = ""
+   private var hotelId: String = ""
+   private var restaurantId: String = ""
     private var phoneNumber: String = ""
     private var workingWeekDays: String = ""
     private var description: String = ""
@@ -144,6 +154,7 @@ class SignUp2 : Fragment() {
             // Update the selected time in the spinner
             restaurantLayoutBinding?.editTextTimeTo?.setText(selectedEndTimeString.toString())
             Log.e("timeEnd", selectedEndTime.toString())
+            Log.e("timeEnd", selectedStartTimeString.toString())
         }
     }
 
@@ -191,11 +202,10 @@ class SignUp2 : Fragment() {
         val restaurantRequest = RestaurantRequest().apply {
             this.phone = phoneNumber
             this.name = placeName
-            // this.rating=2.6
             this.image = imageUrls
             this.workingDays = workingWeekDays
-            this.closeAt = selectedEndTimeString.toString()
-            this.StartingTime = selectedStartTimeString.toString()
+            this.closeAt = selectedEndTime.toString()
+            this.StartingTime = selectedStartTime.toString()
             this.address = fullAddress
             this.city = government
             this.Description = description
@@ -208,9 +218,19 @@ class SignUp2 : Fragment() {
         viewModel.restaurantResponse.observe(viewLifecycleOwner) { restaurantResponse ->
             // Handle the restaurantResponse here
             Log.d("RestaurantFragment", "Response: $restaurantResponse")
+            restaurantId=restaurantResponse.data.document.id
+            Log.e("restaurantId",restaurantId)
             Toast.makeText(requireContext(), "Place Added", Toast.LENGTH_SHORT).show()
-            val action = SignUp2Directions.actionSignUp2ToLoadingOwnerFragment()
-            findNavController().navigate(action)
+            var bundleResId=Bundle().apply {
+                putString("RestaurantId",restaurantId)
+            }
+            val loadingFragment=LoadingOwnerFragment()
+            loadingFragment.arguments=bundleResId
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(2000)
+                view?.findNavController()?.navigate(R.id.action_signUp2_to_loadingOwnerFragment,bundleResId)
+            }
+
         }
 
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
@@ -242,10 +262,19 @@ class SignUp2 : Fragment() {
         viewModel.addHotel(hotelRequest)
         viewModel.hotelResponse.observe(viewLifecycleOwner) {
             Log.d("HotelFragment", "Response: $it")
+          hotelId=  it.data.document.id
+            Log.e("hotelId",hotelId)
             Toast.makeText(requireContext(), "Place Added", Toast.LENGTH_SHORT).show()
-            val action = SignUp2Directions.actionSignUp2ToLoadingOwnerFragment()
-            findNavController().navigate(action)
-
+           var bundleHotelId=Bundle().apply {
+               putString("HotelId",hotelId)
+           }
+            val loadingFragment=LoadingOwnerFragment()
+            loadingFragment.arguments=bundleHotelId
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(2000)
+                view?.findNavController()
+                    ?.navigate(R.id.action_signUp2_to_loadingOwnerFragment, bundleHotelId)
+            }
         }
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             errorMessage?.let {
@@ -253,4 +282,16 @@ class SignUp2 : Fragment() {
             }
         }
     }
+//    private fun sendingIds(){
+////        var bundleId=Bundle().apply {
+////            putString("HotelId",hotelId)
+////            putString("RestaurantId",restaurantId)
+////        }
+////        val loadingFragment=LoadingOwnerFragment()
+////        loadingFragment.arguments=bundleId
+//       // view?.findNavController()?.navigate(R.id.action_signUp2_to_loadingOwnerFragment,bundleId)
+//
+//        val action=SignUp2Directions.actionSignUp2ToLoadingOwnerFragment(hotelId,restaurantId)
+//        findNavController().navigate(action)
+//    }
 }
