@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:id="@+id/fragmentjh"
-    android:layout_height="match_parent">
+<ScrollView android:layout_height="wrap_content"
+android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:id="@+id/frame_layout2"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/back_arrow_button"
@@ -95,6 +93,7 @@
             android:paddingStart="8dp"
             android:paddingTop="8dp"
             android:textSize="14sp"
+            android:layout_marginEnd="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/phone_number_edit_text"
             app:layout_constraintTop_toBottomOf="@id/write_description_text_id" />
@@ -140,16 +139,14 @@
     android:id="@+id/frameLayoutCategory"
     >
 
-
 </FrameLayout>
-
 
         <Button
             android:id="@+id/submit_button"
             android:layout_width="120dp"
            android:backgroundTintMode="screen"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="25dp"
             android:backgroundTint="#E76D24"
             android:text="Submit"
@@ -160,12 +157,12 @@
             android:id="@+id/already_member_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+           android:layout_marginTop="20dp"
             android:text="Already a member? "
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/submit_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/submit_button" />
+         />
 
         <TextView
             android:id="@+id/log_in_text_veiw"
@@ -175,6 +172,7 @@
             android:textColor="#E76D24"
             app:layout_constraintStart_toEndOf="@id/already_member_text_view"
             app:layout_constraintTop_toTopOf="@id/already_member_text_view" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

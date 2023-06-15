@@ -11,7 +11,6 @@ import com.example.businessowner.model.Respond.Restaurant.DocumentRes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 @HiltViewModel
 class RequestViewModel @Inject constructor(
     private val requestRepository: RequestRepository

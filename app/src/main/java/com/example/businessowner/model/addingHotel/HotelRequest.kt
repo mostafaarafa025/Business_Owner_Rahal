@@ -1,5 +1,8 @@
 package com.example.businessowner.model.addingHotel
 
+import kotlinx.parcelize.Parcelize
+
+
  class HotelRequest{
      var Description: String?=null
      var address: String?=null

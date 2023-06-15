@@ -14,9 +14,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.businessowner.R
+import com.example.businessowner.Ui.Insights.insights.InsightsActivity
 import com.example.businessowner.Ui.Insights.viewmodel.AuthViewModel
+import com.example.businessowner.Ui.Insights.viewmodel.SharedViewModel
 import com.example.businessowner.databinding.FragmentLoginBinding
 import com.example.businessowner.model.authentication.LoginRequest
 import com.example.businessowner.model.authentication.SignUpRequest
@@ -78,7 +81,8 @@ lateinit var binding:FragmentLoginBinding
 
 
                }
-               view?.let { Navigation.findNavController(it).navigate(R.id.signUp1) }
+               var intent=Intent(requireContext(),InsightsActivity::class.java)
+               startActivity(intent)
            }else Toast.makeText(activity, "Login Failed ", Toast.LENGTH_LONG).show()
        }
    }
@@ -124,6 +128,5 @@ lateinit var binding:FragmentLoginBinding
             }
         }
     }
-
 
 }

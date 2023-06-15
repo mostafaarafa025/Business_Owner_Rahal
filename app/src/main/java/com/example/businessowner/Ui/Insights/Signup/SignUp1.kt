@@ -61,7 +61,6 @@ return binding.root
 
     }
 
-
     private fun takeCoordinates(){
     val coordinatesText = binding.mapLocationEditText.text.toString()
     val regex = Regex("@(-?\\d+\\.\\d+),(-?\\d+\\.\\d+)")
@@ -83,7 +82,7 @@ return binding.root
             }
         val fragment=SignUp2()
         fragment.arguments=bundle
-   view?.findNavController()?.navigate(R.id.action_from_SignUp1_toSignUp2,bundle)
+   view?.findNavController()?.navigate(R.id.action_signUp1_to_signUp22,bundle)
 
         Log.d("Coordinates", government)
         Log.d("Coordinates", fullAddress)
