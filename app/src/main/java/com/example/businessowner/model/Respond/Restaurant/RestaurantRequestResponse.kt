@@ -18,7 +18,7 @@ data class DocumentRes(
     val closeAt: Double,
     val cuisine: List<String>,
     val id: String,
-    val image: List<Any>,
+    val image: List<String>,
     val location: LocationRes,
     val name: String,
     val numberOfReviews: Int,

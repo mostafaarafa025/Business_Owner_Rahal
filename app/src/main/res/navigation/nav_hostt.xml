@@ -74,4 +74,13 @@
             android:id="@+id/action_passwordChangedOrFailFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/congratulationsFragment"
+        android:name="com.example.businessowner.Ui.Insights.Signup.CongratulationsFragment"
+        android:label="fragment_conguratulations"
+        tools:layout="@layout/fragment_conguratulations" >
+        <action
+            android:id="@+id/action_congratulationsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

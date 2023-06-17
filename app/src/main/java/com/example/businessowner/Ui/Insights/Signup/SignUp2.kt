@@ -67,6 +67,7 @@ class SignUp2 : Fragment() {
         getData()
 
         binding.backArrowButton.setOnClickListener {
+            requireActivity().onBackPressed()
             Navigation.findNavController(view).navigate(R.id.signUp1)
         }
         binding.submitButton.setOnClickListener {

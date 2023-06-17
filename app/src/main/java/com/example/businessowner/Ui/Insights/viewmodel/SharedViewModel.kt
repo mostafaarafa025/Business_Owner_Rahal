@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.businessowner.model.Respond.Hotel.Document
 import com.example.businessowner.model.Respond.Restaurant.DocumentRes
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class SharedViewModel:ViewModel() {
+class SharedViewModel:ViewModel  ()  {
     private val _hotelRequestLiveDataShared = MutableLiveData<List<Document>>()
     val hotelRequestLiveDataShared: LiveData<List<Document>> = _hotelRequestLiveDataShared
 

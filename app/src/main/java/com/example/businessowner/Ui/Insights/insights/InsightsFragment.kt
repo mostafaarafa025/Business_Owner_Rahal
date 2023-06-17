@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.businessowner.R
 
 import com.example.businessowner.databinding.FragmentInsightsBinding
 import com.example.businessowner.model.Respond.Hotel.Document
@@ -28,10 +29,9 @@ class InsightsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
+    }
     }
 
-    }
 
 
 
