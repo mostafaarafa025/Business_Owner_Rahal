@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.businessowner.R
@@ -15,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class InsightsFragment : Fragment() {
+    lateinit var  countIndex:TextView
     lateinit var binding:FragmentInsightsBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

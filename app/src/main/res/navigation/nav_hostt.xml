@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
             app:destination="@id/forgetPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUp1"
+            app:destination="@id/signUp1" />
+        <action
+            android:id="@+id/action_loginFragment_to_choosingWhichPlaceFragment"
+            app:destination="@id/choosingWhichPlaceFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -83,4 +89,29 @@
             android:id="@+id/action_congratulationsFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/signUp1"
+        android:name="com.example.businessowner.Ui.Insights.Signup.SignUp1"
+        android:label="SignUp1" >
+        <action
+            android:id="@+id/action_signUp1_to_signUp2"
+            app:destination="@id/signUp2" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp2"
+        android:name="com.example.businessowner.Ui.Insights.Signup.SignUp2"
+        android:label="SignUp2" >
+        <action
+            android:id="@+id/action_signUp2_to_loadingOwnerFragment"
+            app:destination="@id/loadingOwnerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loadingOwnerFragment"
+        android:name="com.example.businessowner.LoadingOwnerFragment"
+        android:label="fragment_loading_owner"
+        tools:layout="@layout/fragment_loading_owner" />
+    <fragment
+        android:id="@+id/choosingWhichPlaceFragment"
+        android:name="com.example.businessowner.ChoosingWhichPlaceFragment"
+        android:label="ChoosingWhichPlaceFragment" />
 </navigation>

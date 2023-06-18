@@ -14,6 +14,7 @@ class ImageAdapter(private val images :List<ImageItem>):RecyclerView.Adapter<Ima
         fun bind(imageItem: ImageItem) {
             Glide.with(itemView)
                 .load(imageItem.imageUrl)
+                .error(R.drawable.restaurant)
                 .into(imageView)
         }
     }

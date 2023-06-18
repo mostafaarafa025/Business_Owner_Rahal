@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_host_insights"
-    app:startDestination="@id/signUp1">
+    app:startDestination="@id/insightsFragment">
 
     <fragment
         android:id="@+id/insightsFragment"
@@ -29,30 +29,5 @@
         android:name="com.example.businessowner.Ui.Insights.insights.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
-    <fragment
-        android:id="@+id/loadingOwnerFragment"
-        android:name="com.example.businessowner.LoadingOwnerFragment"
-        android:label="fragment_loading_owner"
-        tools:layout="@layout/fragment_loading_owner" >
-        <action
-            android:id="@+id/action_loadingOwnerFragment_to_insightsFragment"
-            app:destination="@id/insightsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUp1"
-        android:name="com.example.businessowner.Ui.Insights.Signup.SignUp1"
-        android:label="SignUp1" >
-        <action
-            android:id="@+id/action_signUp1_to_signUp22"
-            app:destination="@id/signUp2" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUp2"
-        android:name="com.example.businessowner.Ui.Insights.Signup.SignUp2"
-        android:label="SignUp2" >
-        <action
-            android:id="@+id/action_signUp2_to_loadingOwnerFragment2"
-            app:destination="@id/loadingOwnerFragment" />
-    </fragment>
 
 </navigation>

@@ -6,9 +6,15 @@ import javax.inject.Singleton
 
     @Singleton
     class RequestRepository @Inject constructor(
+        private val authRepository: AuthRepository,
         private val homeApi: HomeApi
     ) {
+        val authToken = authRepository.getAuthToken()
             suspend fun getHotelRequest(id:String)=homeApi.getHotelRequest(id)
 
             suspend fun getRestaurantRequest(idRes: String)=homeApi.getRestaurantRequest(idRes)
+
+            suspend fun getRestaurantRespond()=homeApi.getRestaurantRespond("Bearer $authToken")
+
+            suspend fun getRestaurantReviews(resId:String)=homeApi.getRestaurantReviews("Bearer $authToken",resId)
     }

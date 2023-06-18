@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.businessowner.model.Respond.Hotel.Document
 import com.example.businessowner.model.Respond.Restaurant.DocumentRes
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.businessowner.model.getRespond.restaurant.Restaurant
 
 class SharedViewModel:ViewModel  ()  {
     private val _hotelRequestLiveDataShared = MutableLiveData<List<Document>>()
@@ -22,4 +22,10 @@ class SharedViewModel:ViewModel  ()  {
         fun sendRestaurantRequest(documentsRes:List<DocumentRes>){
             _restaurantRequestLiveDataShared.value=documentsRes
         }
+    private val _getRestaurantResponseLiveDataShared=MutableLiveData<List<Restaurant>>()
+    val getRestaurantResponseLiveDataShared:LiveData<List<Restaurant>> = _getRestaurantResponseLiveDataShared
+
+    fun sendRestaurantResponse(restaurant: List<Restaurant>){
+        _getRestaurantResponseLiveDataShared.value=restaurant
+    }
 }

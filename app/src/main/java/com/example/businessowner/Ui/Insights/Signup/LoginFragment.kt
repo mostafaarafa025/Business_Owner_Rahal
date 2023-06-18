@@ -1,6 +1,5 @@
 package com.example.businessowner.Ui.Insights.Signup
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,22 +11,25 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.businessowner.R
 import com.example.businessowner.Ui.Insights.insights.InsightsActivity
+import com.example.businessowner.Ui.Insights.insights.InsightsFragment
 import com.example.businessowner.Ui.Insights.viewmodel.AuthViewModel
-import com.example.businessowner.Ui.Insights.viewmodel.SharedViewModel
+import com.example.businessowner.Ui.Insights.viewmodel.RequestViewModel
 import com.example.businessowner.databinding.FragmentLoginBinding
 import com.example.businessowner.model.authentication.LoginRequest
-import com.example.businessowner.model.authentication.SignUpRequest
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 lateinit var binding:FragmentLoginBinding
+    private val requestViewModel: RequestViewModel by viewModels()
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private val authViewModel: AuthViewModel by viewModels()
@@ -81,8 +83,9 @@ lateinit var binding:FragmentLoginBinding
 
 
                }
-               var intent=Intent(requireContext(),InsightsActivity::class.java)
-               startActivity(intent)
+//               var intent=Intent(requireContext(),InsightsActivity::class.java)
+//               startActivity(intent)
+               checkRestaurantResponse()
            }else Toast.makeText(activity, "Login Failed ", Toast.LENGTH_LONG).show()
        }
    }
@@ -126,6 +129,31 @@ lateinit var binding:FragmentLoginBinding
             }else{
                 passwordErrorMessage.text = ""
             }
+        }
+    }
+    private fun checkRestaurantResponse(){
+        requestViewModel.getRestaurantResponse()
+        requestViewModel.getRestaurantResponseLiveData.observe(viewLifecycleOwner) { response ->
+            Log.d("restaurant", "Restaurant Response: $response")
+            val resultCount=response.size
+
+            if (resultCount==0){
+                Log.e("noPlace","empty")
+                view?.findNavController()?.navigate(R.id.action_loginFragment_to_signUp1)
+            }else if (resultCount == 1) {
+                Log.e("onePlace","yaraaaaab")
+                val countIndex=0
+                val resId=response[0].id
+             val intent=Intent(requireContext(),InsightsActivity::class.java)
+                intent.putExtra("countIndex",countIndex )
+                intent.putExtra("resId",resId)
+                startActivity(intent)
+            }else if(resultCount > 1){
+                Log.e("placeCount","more than one")
+                view?.findNavController()?.navigate(R.id.action_loginFragment_to_choosingWhichPlaceFragment)
+
+            }
+
         }
     }
 

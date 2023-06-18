@@ -228,7 +228,7 @@ class SignUp2 : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
                 delay(2000)
                 view?.findNavController()
-                    ?.navigate(R.id.action_signUp2_to_loadingOwnerFragment2, bundleResId)
+                    ?.navigate(R.id.action_signUp2_to_loadingOwnerFragment, bundleResId)
             }
 
         }
@@ -273,7 +273,7 @@ class SignUp2 : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
                 delay(2000)
                 view?.findNavController()
-                    ?.navigate(R.id.action_signUp2_to_loadingOwnerFragment2, bundleHotelId)
+                    ?.navigate(R.id.action_signUp2_to_loadingOwnerFragment, bundleHotelId)
             }
         }
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->

@@ -2,11 +2,10 @@ package com.example.businessowner.Ui.Insights.insights
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.businessowner.LoadingOwnerFragment
 import com.example.businessowner.R
 import com.example.businessowner.databinding.ActivityInsightsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,31 +20,17 @@ class InsightsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
+        val receivedIndex = intent.getIntExtra("countIndex",0)
+        val receiverId=intent.getStringExtra("resId")
+        Log.e("activity",receivedIndex.toString())
         val bottomNavigation = binding.bottomNavigation
          navController = findNavController(R.id.fragmentContainerView2)
         bottomNavigation.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-        if(
-            destination.id !=R.id.insightsFragment &&
-            destination.id !=R.id.reviewsFragment &&
-            destination.id !=R.id.profileFragment2
-        ){
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            bottomNavigation.visibility=View.GONE
-        }else
-        {
-            supportActionBar?.setDisplayHomeAsUpEnabled(false)
-            bottomNavigation.visibility=View.VISIBLE
-        }
-        }
+
 
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
 
     private fun navigateToInsightsFragment() {
         val insightsFragment = InsightsFragment()

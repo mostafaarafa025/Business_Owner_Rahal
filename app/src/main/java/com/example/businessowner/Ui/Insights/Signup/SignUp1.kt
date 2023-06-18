@@ -82,7 +82,7 @@ return binding.root
             }
         val fragment=SignUp2()
         fragment.arguments=bundle
-   view?.findNavController()?.navigate(R.id.action_signUp1_to_signUp22,bundle)
+   view?.findNavController()?.navigate(R.id.action_signUp1_to_signUp2,bundle)
 
         Log.d("Coordinates", government)
         Log.d("Coordinates", fullAddress)

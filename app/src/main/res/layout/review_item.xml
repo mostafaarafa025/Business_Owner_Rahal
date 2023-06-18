@@ -7,7 +7,7 @@
     app:cardElevation="4dp"
     android:layout_margin="4dp"
     app:cardUseCompatPadding="true"
-    android:layout_height="260dp">
+    android:layout_height="wrap_content">
 
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
@@ -53,29 +53,12 @@
           app:layout_constraintTop_toBottomOf="@id/human_review"
           style="?android:attr/ratingBarStyleIndicator"
           android:numStars="5"
+          android:layout_marginTop="12dp"
           android:progressTint="#F2A11E"
       android:id="@+id/human_rate"
           android:rating="3.5"
          />
-      <com.google.android.material.imageview.ShapeableImageView
-          android:layout_width="60dp"
-          android:layout_marginTop="4dp"
-          android:layout_height="60dp"
-          app:shapeAppearanceOverlay="@style/rounded"
-          android:id="@+id/human_add_image"
-         app:layout_constraintStart_toStartOf="@id/human_rate"
-         app:layout_constraintTop_toBottomOf="@id/human_rate"
-          android:src="@drawable/bruxies"
-         />
-      <com.google.android.material.imageview.ShapeableImageView
-          android:layout_width="60dp"
-          android:layout_height="60dp"
-          app:shapeAppearanceOverlay="@style/rounded"
-          android:layout_marginStart="8dp"
-         app:layout_constraintStart_toEndOf="@id/human_add_image"
-         app:layout_constraintBottom_toBottomOf="@id/human_add_image"
-          android:src="@drawable/bruxies"
-         />
+
    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
