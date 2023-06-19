@@ -1,11 +1,11 @@
-package com.example.businessowner.model.Respond.Restaurant
+package com.example.businessowner.model.getRespond.restaurant
 
 data class RestaurantReviews(
-    val `data`: DataReviews,
+    val `data`: DataRestaurantReviews,
     val status: String
 )
 
-data class DataReviews(
+data class DataRestaurantReviews(
     val reviews: List<Review>
 )
 data class Review(

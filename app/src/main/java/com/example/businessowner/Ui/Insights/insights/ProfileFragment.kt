@@ -19,7 +19,7 @@ import com.example.businessowner.adapters.ImageAdapter
 import com.example.businessowner.adapters.ImageItem
 import com.example.businessowner.databinding.FragmentProfileBinding
 import com.example.businessowner.model.Respond.Hotel.Document
-import com.example.businessowner.model.Respond.Restaurant.DocumentRes
+import com.example.businessowner.model.getRespond.hotel.Hotel
 import com.example.businessowner.model.getRespond.restaurant.Restaurant
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
@@ -29,7 +29,8 @@ class ProfileFragment : Fragment() {
     private val requestViewModel: RequestViewModel by viewModels()
     private var coordinatesList: List<Double> = emptyList()
     lateinit var binding: FragmentProfileBinding
-    private var countIndex:Int = 0
+    private lateinit var countIndexHotelString:String
+    private lateinit var countIndexRestaurantString:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,19 +44,23 @@ class ProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        countIndex = activity?.intent?.getIntExtra("countIndex",0)!!
+        countIndexRestaurantString = activity?.intent?.getStringExtra("countIndexRes")?:""
+        countIndexHotelString=activity?.intent?.getStringExtra("countIndexHotel")?:""
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
       //  getRestaurantData()
+        applyMethods()
         binding.closeNavigationDrawer.setOnClickListener {
             binding.drawerLayout.closeDrawer(binding.navigationView)
 
         }
-        Log.e("count",countIndex.toString())
-        getRestaurantResponse()
-       // applyMethods()
+        Log.e("countRes",countIndexRestaurantString.toString())
+        Log.e("countHotel",countIndexHotelString.toString())
+        //applyMethods()
+//        getHotelResponse()
+//        getRestaurantResponse()
         binding.mapIv.setOnClickListener {
             openMaps()
         }
@@ -70,7 +75,6 @@ class ProfileFragment : Fragment() {
         inflater.inflate(R.menu.menu_too_bar, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -90,21 +94,21 @@ class ProfileFragment : Fragment() {
             else -> return super.onOptionsItemSelected(item)
         }
     }
-    private fun getHotelData(){
-        val sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
-        sharedViewModel.hotelRequestLiveDataShared.observe(viewLifecycleOwner) { data ->
-            val document: Document = data[0]
-            binding.descriptionTv.text=document.Description
-            binding.locationEt.text=document.address
-            binding.placeEt.text=document.name
-            coordinatesList=document.location.coordinates
-            binding.phoneEt.text=document.phone
-            binding.hotelClassEt.text=document.rating.toString()
-            setupRecyclerView(document.image)
-                Log.d("ReceivingFragment", "Received HotelResponse in Profile: $data")
-                Log.e("images",document.image.toString())
-        }
-    }
+//    private fun getHotelData(){
+//        val sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+//        sharedViewModel.hotelRequestLiveDataShared.observe(viewLifecycleOwner) { data ->
+//            val document: Document = data[0]
+//            binding.descriptionTv.text=document.Description
+//            binding.locationEt.text=document.address
+//            binding.placeEt.text=document.name
+//            coordinatesList=document.location.coordinates
+//            binding.phoneEt.text=document.phone
+//            binding.hotelClassEt.text=document.rating.toString()
+//            setupRecyclerView(document.image)
+//                Log.d("ReceivingFragment", "Received HotelResponse in Profile: $data")
+//                Log.e("images",document.image.toString())
+//        }
+//    }
 
     private fun resLayoutChange(){
         binding.restaurantAttributes.visibility=View.VISIBLE
@@ -201,7 +205,7 @@ class ProfileFragment : Fragment() {
         private fun getRestaurantResponse(){
             requestViewModel.getRestaurantResponse()
             requestViewModel.getRestaurantResponseLiveData.observe(viewLifecycleOwner){ it->
-                val restaurant : Restaurant =it[countIndex]
+                val restaurant : Restaurant =it[countIndexRestaurantString.toInt()]
                 Log.d("restaurant", "Restaurant Response: $it")
                 resLayoutChange()
                 setupRecyclerView(restaurant.image)
@@ -216,4 +220,25 @@ class ProfileFragment : Fragment() {
                 binding.scheduleEt.text=restaurant.workingDays
             }
         }
+    private fun getHotelResponse(){
+        requestViewModel.getHotelResponse()
+        requestViewModel.getHotelResponseLiveData.observe(viewLifecycleOwner){
+            val hotel:Hotel=it[countIndexHotelString.toInt()]
+            Log.d("restaurant", "Hotel Response: $it")
+            setupRecyclerView(hotel.image)
+            binding.descriptionTv.text=hotel.Description
+            binding.locationEt.text=hotel.address
+            binding.placeEt.text=hotel.name
+            coordinatesList=hotel.location.coordinates
+            binding.phoneEt.text=hotel.phone
+            binding.hotelClassEt.text=hotel.rating.toString()
+        }
+    }
+    private fun applyMethods(){
+        if (countIndexRestaurantString .isNotEmpty()){
+            getRestaurantResponse()
+        }else{
+            getHotelResponse()
+        }
+    }
     }

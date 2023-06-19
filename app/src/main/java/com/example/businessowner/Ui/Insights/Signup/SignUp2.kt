@@ -213,32 +213,25 @@ class SignUp2 : Fragment() {
             }
         }
         viewModel.addRestaurant(restaurantRequest)
-
         viewModel.restaurantResponse.observe(viewLifecycleOwner) { restaurantResponse ->
             // Handle the restaurantResponse here
             Log.d("RestaurantFragment", "Response: $restaurantResponse")
             restaurantId=restaurantResponse.data.document.id
             Log.e("restaurantId",restaurantId)
             Toast.makeText(requireContext(), "Place Added", Toast.LENGTH_SHORT).show()
-            var bundleResId = Bundle().apply {
-                putString("resId", restaurantId)
-            }
-            val loadingFragment=LoadingOwnerFragment()
-            loadingFragment.arguments=bundleResId
             CoroutineScope(Dispatchers.Main).launch {
                 delay(2000)
                 view?.findNavController()
-                    ?.navigate(R.id.action_signUp2_to_loadingOwnerFragment, bundleResId)
+                    ?.navigate(R.id.action_signUp2_to_loadingOwnerFragment)
             }
-
         }
-
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             errorMessage?.let {
                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 
     private fun addHotel() {
         placeName = binding.placeNameEditText.text.toString()
@@ -265,15 +258,10 @@ class SignUp2 : Fragment() {
           hotelId=  it.data.document._id
             Log.e("hotelId",hotelId)
             Toast.makeText(requireContext(), "Place Added", Toast.LENGTH_SHORT).show()
-           var bundleHotelId=Bundle().apply {
-               putString("HotelId",hotelId)
-           }
-            val loadingFragment=LoadingOwnerFragment()
-            loadingFragment.arguments=bundleHotelId
             CoroutineScope(Dispatchers.Main).launch {
                 delay(2000)
                 view?.findNavController()
-                    ?.navigate(R.id.action_signUp2_to_loadingOwnerFragment, bundleHotelId)
+                    ?.navigate(R.id.action_signUp2_to_loadingOwnerFragment)
             }
         }
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->

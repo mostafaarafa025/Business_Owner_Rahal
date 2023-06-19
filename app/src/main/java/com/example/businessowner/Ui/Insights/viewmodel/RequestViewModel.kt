@@ -8,7 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.businessowner.Network.repository.RequestRepository
 import com.example.businessowner.model.Respond.Hotel.Document
 import com.example.businessowner.model.Respond.Restaurant.DocumentRes
-import com.example.businessowner.model.Respond.Restaurant.Review
+import com.example.businessowner.model.getRespond.hotel.Hotel
+import com.example.businessowner.model.getRespond.hotel.ReviewHotel
+import com.example.businessowner.model.getRespond.restaurant.Review
 import com.example.businessowner.model.getRespond.restaurant.Restaurant
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -35,6 +37,7 @@ class RequestViewModel @Inject constructor(
                     "requestViewModel",
                     "Failed to give HotelResponse. Error body: $errorBody, Status code: $statusCode"
                 )
+
 
             }
 
@@ -64,6 +67,7 @@ class RequestViewModel @Inject constructor(
                     Log.e("PlaceViewModel", "Failed to give RestaurantRequest. Exception: ${e.message}")
                 }
             }
+
     private val _getRestaurantResponseLiveData= MutableLiveData<List<Restaurant>>()
     val getRestaurantResponseLiveData:LiveData<List<Restaurant>> = _getRestaurantResponseLiveData
             fun getRestaurantResponse()=viewModelScope.launch {
@@ -87,6 +91,32 @@ class RequestViewModel @Inject constructor(
                     Log.e("PlaceViewModel", "Failed to give getRestaurantResponse. Exception: ${e.message}")
                 }
             }
+
+
+        private val _getHotelRespondLiveData=MutableLiveData<List<Hotel>>()
+    val getHotelResponseLiveData:LiveData<List<Hotel>> = _getHotelRespondLiveData
+    fun getHotelResponse()=viewModelScope.launch {
+        try {
+            val response=requestRepository.getHotelRespond()
+            if (response.isSuccessful){
+                response.body()!!.data.hotels.let {
+                    _getHotelRespondLiveData.postValue(it)
+                    Log.e("Great response  ", "getHotelResponse success ")
+                }
+            }else {
+                val errorBody = response.errorBody()?.string()
+                val statusCode = response.code()
+                Log.e(
+                    "requestViewModel",
+                    "Failed to give getHotelResponse. Error body: $errorBody, Status code: $statusCode"
+                )
+            }
+        }catch (e: Exception){
+            Log.e("PlaceViewModel", "Failed to give getHotelResponse. Exception: ${e.message}")
+        }
+    }
+
+
     private val _getRestaurantReviewsLiveData= MutableLiveData<List<Review>>()
     val getRestaurantReviewsLiveData:LiveData<List<Review>> = _getRestaurantReviewsLiveData
     fun getRestaurantReviews(resId:String)=viewModelScope.launch {
@@ -107,6 +137,30 @@ class RequestViewModel @Inject constructor(
             }
         }catch (e: Exception){
             Log.e("PlaceViewModel", "Failed to give getRestaurantReviews. Exception: ${e.message}")
+        }
+    }
+    private val _getHotelReviewsLiveData=MutableLiveData<List<ReviewHotel>>()
+
+
+    val getHotelReviewsLiveData:LiveData<List<ReviewHotel>> = _getHotelReviewsLiveData
+    fun getHotelReviews(hotelId:String)=viewModelScope.launch {
+        try {
+            val response=requestRepository.getHotelReviews(hotelId)
+            if (response.isSuccessful){
+             response.body()!!.data.reviews.let {
+                 _getHotelReviewsLiveData.postValue(it)
+                 Log.e("great response","getHotelReviews success")
+             }
+            }else {
+                val errorBody = response.errorBody()?.string()
+                val statusCode = response.code()
+                Log.e(
+                    "requestViewModel",
+                    "Failed to give getHotelReviews. Error body: $errorBody, Status code: $statusCode"
+                )
+            }
+        }catch (e: Exception){
+            Log.e("PlaceViewModel", "Failed to give getHotelReviews. Exception: ${e.message}")
         }
     }
 

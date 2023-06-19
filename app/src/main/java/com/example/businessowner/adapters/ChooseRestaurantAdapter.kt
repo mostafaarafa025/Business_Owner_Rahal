@@ -11,7 +11,7 @@ import com.example.businessowner.Ui.Insights.viewmodel.RequestViewModel
 import com.example.businessowner.databinding.ChoosenplaceitemBinding
 import com.example.businessowner.model.getRespond.restaurant.Restaurant
 
-class ChoosePlaceAdapter(private val requestViewModel: RequestViewModel):RecyclerView.Adapter<ChoosePlaceAdapter.ViewHolder>() {
+class ChooseRestaurantAdapter(private val requestViewModel: RequestViewModel):RecyclerView.Adapter<ChooseRestaurantAdapter.ViewHolder>() {
         inner class ViewHolder(private val viewBinding:ChoosenplaceitemBinding):RecyclerView.ViewHolder(viewBinding.root){
                 fun bind(item:Restaurant,position: Int){
                         itemView.setOnClickListener {
@@ -21,7 +21,7 @@ class ChoosePlaceAdapter(private val requestViewModel: RequestViewModel):Recycle
                         viewBinding.apply {
                 Glide.with(itemView)
                         .load(item.image)
-                        .error(R.drawable.restaurant)
+                        .error(R.drawable.bruxies)
                         .into(imageView)
                        textView.text=item.name
                         }

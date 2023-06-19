@@ -18,6 +18,10 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
+
+
 
     private val _signUpResponse = MutableLiveData<SignUpResponse>()
     val signUpResponse: LiveData<SignUpResponse> = _signUpResponse
@@ -29,6 +33,15 @@ fun signUp( request: SignUpRequest) {
             if (response.isSuccessful) {
                 _signUpResponse.value = response.body()
                 Log.e("good Signup","signup :good")
+
+            }else {
+                val errorBody = response.errorBody()?.string()
+                val statusCode = response.code()
+                Log.e(
+                    "requestViewModel",
+                    "Failed to give HotelResponse. Error body: $errorBody, Status code: $statusCode"
+                )
+                _error.value = "Register failed"
             }
 
         } catch (e: Exception) {
@@ -46,6 +59,14 @@ fun signUp( request: SignUpRequest) {
             if (response.isSuccessful &&response.body()?.data?.user?.role=="business_owner"){
                 _loginResponse.value=response.body()
                 Log.e("good Login","Login :good")
+            }else {
+                val errorBody = response.errorBody()?.string()
+                val statusCode = response.code()
+                Log.e(
+                    "requestViewModel",
+                    "Failed to give HotelResponse. Error body: $errorBody, Status code: $statusCode"
+                )
+                _error.value = "Invalid email or password"
             }
         }catch (e: Exception) {
             Log.e("error Login","login : ${e.message}")

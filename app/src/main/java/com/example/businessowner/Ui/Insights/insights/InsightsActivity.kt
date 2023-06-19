@@ -20,23 +20,19 @@ class InsightsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val receivedIndex = intent.getIntExtra("countIndex",0)
-        val receiverId=intent.getStringExtra("resId")
-        Log.e("activity",receivedIndex.toString())
+        val receivedIndexRes = intent.getStringExtra("countIndexRes")
+        val receiverIdRes=intent.getStringExtra("resId")
+
+
+        val receivedIndexHotel=intent.getStringExtra("countIndexHotel")
+        val receiverIdHotel=intent.getStringExtra("hotelId")
+        Log.e("indexRes",receivedIndexRes.toString())
         val bottomNavigation = binding.bottomNavigation
          navController = findNavController(R.id.fragmentContainerView2)
         bottomNavigation.setupWithNavController(navController)
 
 
-
     }
 
-
-    private fun navigateToInsightsFragment() {
-        val insightsFragment = InsightsFragment()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.insight_activity_ID, insightsFragment)
-            .commit()
-    }
 }
 

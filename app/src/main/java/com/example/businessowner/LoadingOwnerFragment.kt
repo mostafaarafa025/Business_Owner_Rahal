@@ -40,9 +40,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class LoadingOwnerFragment : Fragment() {
     private val requestViewModel: RequestViewModel by viewModels()
-    private var hotelId: String = ""
-
-    private var restaurantId: String = ""
     private  val CHANNEL_ID = "my_channel"
     private  val NOTIFICATION_ID = 123
     private var statusRes: String = ""
@@ -65,88 +62,31 @@ class LoadingOwnerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      //  getDataIds()
+
 //        CoroutineScope(Dispatchers.Main).launch {
 //            delay(2000)
-////            applyMethods()
-////            checkingStatusHotel()
+
 //        }
-        getRestaurantResponse()
+     //   getRestaurantResponse()
         binding.next.setOnClickListener {
           showNotification()
         }
 
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(5000)
-            val intent=Intent(requireContext(),InsightsActivity::class.java)
-            startActivity(intent)
-//           view.findNavController().navigate(R.id.action_loadingOwnerFragment_to_insightsFragment)
-        }
-    }
-//
-//    private fun getDataIds() {
-//        restaurantId = arguments?.getString("resId") ?: ""
-//        hotelId = arguments?.getString("HotelId") ?: ""
-//        Log.e("hotelIdLoadingFragment", hotelId)
-//        Log.e("restaurantIdLoadingFragment", restaurantId)
-//    }
-
-    private fun getHotelResponse() {
-        requestViewModel.getHotelRequest(hotelId)
-        requestViewModel.getHotelRequestLiveData.observe(viewLifecycleOwner) { data ->
-            val document: Document = data[0]
-            statushotel = document.status
-            Log.d("LoadingFragment", "Hotel Response: $data")
-            val sharedViewModel =
-                ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
-            sharedViewModel.setHotelRequest(data)
-        }
-    }
-
-
-    private fun getRestaurantRequest() {
-        requestViewModel.getRestaurantRequest(restaurantId)
-        requestViewModel.getRestaurantLiveData.observe(viewLifecycleOwner) { it ->
-            val document: DocumentRes = it[0]
-            statushotel = document.status
-            Log.d("LoadingFragment", "Restaurant Response: $it")
-            val sharedViewModel =
-                ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
-            sharedViewModel.sendRestaurantRequest(it)
-        }
-    }
-    private fun getRestaurantResponse(){
-        requestViewModel.getRestaurantResponse()
-        requestViewModel.getRestaurantResponseLiveData.observe(viewLifecycleOwner){ it->
-            val restaurant : Restaurant=it[0]
-            val createdBy=restaurant.createdBy
-            Log.d("LoadingFragment", "Restaurant Response: $it")
-            Log.e("createdBY",createdBy.toString())
-
-        }
-    }
-
-//    private fun applyMethods() {
-//        if (restaurantId.isNotEmpty()) {
-//            getRestaurantRequest()
+//        CoroutineScope(Dispatchers.Main).launch {
+//            delay(5000)
+//            val intent=Intent(requireContext(),InsightsActivity::class.java)
+//            startActivity(intent)
 //        }
-//        if (hotelId.isNotEmpty()) {
-//            getHotelResponse()
-//        } else
-//            Log.e("error", "error")
-//
-//    }
+    }
 
-//    private fun checkingStatusHotel() {
-//        if (statushotel == "in-active") {
+//    private fun getRestaurantResponse(){
+//        requestViewModel.getRestaurantResponse()
+//        requestViewModel.getRestaurantResponseLiveData.observe(viewLifecycleOwner){ it->
+//            val restaurant : Restaurant=it[0]
+//            val createdBy=restaurant.createdBy
+//            Log.d("LoadingFragment", "Restaurant Response: $it")
+//            Log.e("createdBY",createdBy.toString())
 //
-//            view?.findNavController()?.navigate(R.id.action_loadingOwnerFragment_to_insightsFragment)
-//
-//        } else if (statushotel != "in-active") {
-//            Log.e("statusHotel"," value is: $statushotel" )
-//
-//        } else {
-//            Log.e("statusHotel","noData")
 //        }
 //    }
 

@@ -7,33 +7,32 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.businessowner.Ui.Insights.viewmodel.RequestViewModel
 import com.example.businessowner.databinding.ReviewItemBinding
-import com.example.businessowner.model.Respond.Restaurant.Review
+import com.example.businessowner.model.getRespond.hotel.ReviewHotel
 
-class ReviewsAdapter(requestViewModel: RequestViewModel) :RecyclerView.Adapter<ReviewsAdapter.ViewHolder>() {
-        inner class ViewHolder(private val viewBinding:ReviewItemBinding):RecyclerView.ViewHolder(viewBinding.root){
+class ReviewsHotelAdapter(requestViewModel: RequestViewModel) :RecyclerView.Adapter<ReviewsHotelAdapter.ViewHolder>() {
+    inner class ViewHolder(private val viewBinding:ReviewItemBinding): RecyclerView.ViewHolder(viewBinding.root){
+        fun bind(item: ReviewHotel){
+            viewBinding.apply {
+                humanName.text=item.name
+                humanReview.text=item.comment
+                humanRate.rating=item.rating.toFloat()
 
-            fun bind(item:Review){
-                viewBinding.apply {
-                    humanName.text=item.name
-                    humanReview.text=item.comment
-                    humanRate.rating=item.rating.toFloat()
-
-                }
             }
         }
-    private val diffUtil=object : DiffUtil.ItemCallback<Review>(){
-        override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
+    }
+    private val diffUtil=object : DiffUtil.ItemCallback<ReviewHotel>(){
+        override fun areItemsTheSame(oldItem: ReviewHotel, newItem: ReviewHotel): Boolean {
             return oldItem.id==newItem.id
         }
 
 
-        override fun areContentsTheSame(oldItem: Review, newItem: Review): Boolean {
+        override fun areContentsTheSame(oldItem: ReviewHotel, newItem: ReviewHotel): Boolean {
             return oldItem==newItem
         }
     }
 
     val differ= AsyncListDiffer(this,diffUtil)
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewsHotelAdapter.ViewHolder {
         return ViewHolder(
             ReviewItemBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -41,7 +40,6 @@ class ReviewsAdapter(requestViewModel: RequestViewModel) :RecyclerView.Adapter<R
             )
         )
     }
-
 
     override fun getItemCount(): Int {
         return  differ.currentList.size

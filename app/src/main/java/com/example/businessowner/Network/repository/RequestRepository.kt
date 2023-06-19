@@ -16,5 +16,9 @@ import javax.inject.Singleton
 
             suspend fun getRestaurantRespond()=homeApi.getRestaurantRespond("Bearer $authToken")
 
+            suspend fun getHotelRespond()=homeApi.getHotelRespond("Bearer $authToken")
+
             suspend fun getRestaurantReviews(resId:String)=homeApi.getRestaurantReviews("Bearer $authToken",resId)
+
+            suspend fun getHotelReviews(hotelId:String)=homeApi.getHotelReviews("Bearer $authToken",hotelId)
     }
