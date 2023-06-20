@@ -22,7 +22,7 @@ class InsightsActivity : AppCompatActivity() {
 
         val receivedIndexRes = intent.getStringExtra("countIndexRes")
         val receiverIdRes=intent.getStringExtra("resId")
-
+        val token=intent.getStringExtra("token")
 
         val receivedIndexHotel=intent.getStringExtra("countIndexHotel")
         val receiverIdHotel=intent.getStringExtra("hotelId")

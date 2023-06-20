@@ -1,5 +1,7 @@
 package com.example.businessowner.di
 
+import android.app.Application
+import android.content.Context
 import com.example.businessowner.Network.remote.HomeApi
 import dagger.Module
 import dagger.Provides
@@ -12,6 +14,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object AppModule {
+
     @Provides
     @Singleton
     fun provideApi(): HomeApi =
@@ -21,4 +24,11 @@ object AppModule {
             .build()
             .create(HomeApi::class.java)
 
+    @Provides
+    @Singleton
+    fun provideApplicationContext(application: Application): Context {
+        return application.applicationContext
+    }
+
 }
+

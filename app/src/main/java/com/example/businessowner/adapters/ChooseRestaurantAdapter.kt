@@ -11,7 +11,7 @@ import com.example.businessowner.Ui.Insights.viewmodel.RequestViewModel
 import com.example.businessowner.databinding.ChoosenplaceitemBinding
 import com.example.businessowner.model.getRespond.restaurant.Restaurant
 
-class ChooseRestaurantAdapter(private val requestViewModel: RequestViewModel):RecyclerView.Adapter<ChooseRestaurantAdapter.ViewHolder>() {
+class ChooseRestaurantAdapter(requestViewModel: RequestViewModel) :RecyclerView.Adapter<ChooseRestaurantAdapter.ViewHolder>() {
         inner class ViewHolder(private val viewBinding:ChoosenplaceitemBinding):RecyclerView.ViewHolder(viewBinding.root){
                 fun bind(item:Restaurant,position: Int){
                         itemView.setOnClickListener {
@@ -19,14 +19,15 @@ class ChooseRestaurantAdapter(private val requestViewModel: RequestViewModel):Re
                 onItemClickListener?.invoke(item,position)
                         }
                         viewBinding.apply {
-                Glide.with(itemView)
-                        .load(item.image)
-                        .error(R.drawable.bruxies)
-                        .into(imageView)
+//                Glide.with(itemView)
+//                        .load(item.image)
+//                        .error(R.drawable.restaurant)
+//                        .into(imageView)
                        textView.text=item.name
                         }
                 }
         }
+
         private val diffUtil=object : DiffUtil.ItemCallback<Restaurant>(){
                 override fun areItemsTheSame(oldItem: Restaurant, newItem: Restaurant): Boolean {
                         return oldItem.id==newItem.id

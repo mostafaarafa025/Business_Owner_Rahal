@@ -6,69 +6,85 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.businessowner.R
 import com.example.businessowner.Ui.Insights.Signup.SignUpFragment
 import com.example.businessowner.Ui.Insights.viewmodel.RequestViewModel
-import com.example.businessowner.Ui.Insights.viewmodel.SharedViewModel
 import com.example.businessowner.adapters.ImageAdapter
 import com.example.businessowner.adapters.ImageItem
 import com.example.businessowner.databinding.FragmentProfileBinding
-import com.example.businessowner.model.Respond.Hotel.Document
 import com.example.businessowner.model.getRespond.hotel.Hotel
 import com.example.businessowner.model.getRespond.restaurant.Restaurant
+import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(),NavigationView.OnNavigationItemSelectedListener {
     private val requestViewModel: RequestViewModel by viewModels()
     private var coordinatesList: List<Double> = emptyList()
     lateinit var binding: FragmentProfileBinding
     private lateinit var countIndexHotelString:String
+    private lateinit var token:String
+    private lateinit var drawerLayout:DrawerLayout
     private lateinit var countIndexRestaurantString:String
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+                drawerLayout = activity?.findViewById(R.id.drawer_layout)!!
+        val navView: NavigationView = activity?.findViewById(R.id.navigation_view)!!
+        navView.setNavigationItemSelectedListener(this)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding= FragmentProfileBinding.inflate(inflater,container,false)
-       setHasOptionsMenu(true)
+     setHasOptionsMenu(true)
         return binding.root
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        token=activity?.intent?.getStringExtra("token")?:""
         countIndexRestaurantString = activity?.intent?.getStringExtra("countIndexRes")?:""
         countIndexHotelString=activity?.intent?.getStringExtra("countIndexHotel")?:""
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      //  getRestaurantData()
         applyMethods()
         binding.closeNavigationDrawer.setOnClickListener {
             binding.drawerLayout.closeDrawer(binding.navigationView)
-
         }
         Log.e("countRes",countIndexRestaurantString.toString())
         Log.e("countHotel",countIndexHotelString.toString())
-        //applyMethods()
-//        getHotelResponse()
-//        getRestaurantResponse()
         binding.mapIv.setOnClickListener {
             openMaps()
         }
     }
 
-    fun onCreateOptionsMenu2(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.setting_business_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            // Handle navigation drawer item clicks here
+            R.id.editProfileFragment -> {
+                view?.findNavController()?.navigate(R.id.action_profileFragment2_to_editProfileFragment)
+                return true
+            }
+            R.id.addAnotherPlace -> {
+                view?.findNavController()?.navigate(R.id.action_profileFragment2_to_addAnotherPlaceFragment)
+                return true
+            }
+            R.id.logout -> {
+               showDialog()
+            }
+            // Add more items as needed
+        }
+        return false
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -82,15 +98,6 @@ class ProfileFragment : Fragment() {
                 binding.drawerLayout.openDrawer(binding.navigationView)
                 return true
             }
-
-            R.id.editProfileFragment -> {
-                view?.let {
-                    Navigation.findNavController(it)
-                        .navigate(R.id.action_profileFragment2_to_editProfileFragment)
-                }
-                return true
-            }
-
             else -> return super.onOptionsItemSelected(item)
         }
     }
@@ -149,8 +156,9 @@ class ProfileFragment : Fragment() {
       }
     fun showDialog() {
         val builder = AlertDialog.Builder(activity)
-        builder.setMessage("Are u sure want Logout?")
+        builder.setMessage("Are you sure want to Logout?")
             .setTitle("")
+
             .setPositiveButton("Yes") { dialog, id ->
 
                 startActivity(Intent(activity, SignUpFragment::class.java))
@@ -162,40 +170,6 @@ class ProfileFragment : Fragment() {
 
         val dialog = builder.create()
         dialog.show()
-    }
-
-    private fun menus(){
-        binding.navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.action_setting -> {
-                    // Handle Settings menu item click
-                    // Perform the desired action here
-                    binding.drawerLayout.openDrawer(binding.navigationView)
-                    true
-                }
-                R.id.editProfileFragment -> {
-                    // Handle Edit Profile menu item click
-                    // Perform the desired action here
-                    true
-                }
-                R.id.changePassword -> {
-                    // Handle Change Password menu item click
-                    // Perform the desired action here
-                    true
-                }
-                R.id.logout -> {
-                    // Handle Logout menu item click
-                    // Perform the desired action here
-                    showDialog()
-                    true
-                }
-                else -> false
-            }
-        }
-
-//        binding.yourButtonId.setOnClickListener {
-//            binding.navigationView.openDrawer(GravityCompat.END) // Open the menu drawer
-//        }
     }
 
     override fun onDestroy() {

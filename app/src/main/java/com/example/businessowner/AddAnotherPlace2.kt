@@ -1,7 +1,7 @@
-package com.example.businessowner.Ui.Insights.Signup
+package com.example.businessowner
 
 import android.os.Bundle
-import android.text.format.DateFormat.is24HourFormat
+import android.text.format.DateFormat
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,31 +9,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import com.example.businessowner.LoadingOwnerFragment
-import com.example.businessowner.R
-import com.example.businessowner.databinding.FragmentSignUp2Binding
-import com.google.android.material.timepicker.MaterialTimePicker
-import com.google.android.material.timepicker.TimeFormat
-import dagger.hilt.android.AndroidEntryPoint
 import com.example.businessowner.Ui.Insights.viewmodel.PlaceViewModel
+import com.example.businessowner.databinding.FragmentAddAnotherPlace2Binding
+import com.example.businessowner.databinding.FragmentSignUp2Binding
 import com.example.businessowner.databinding.HotelLayoutBinding
 import com.example.businessowner.databinding.RestaurantLayoutBinding
 import com.example.businessowner.model.addingHotel.HotelRequest
 import com.example.businessowner.model.addingHotel.LocationHotel
 import com.example.businessowner.model.addingRestaurant.LocationRestaurant
 import com.example.businessowner.model.addingRestaurant.RestaurantRequest
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SignUp2 : Fragment() {
-    lateinit var binding: FragmentSignUp2Binding
+class AddAnotherPlace2 : Fragment() {
+    lateinit var binding:FragmentAddAnotherPlace2Binding
     private var restaurantLayoutBinding: RestaurantLayoutBinding? = null
     private var hotelLayoutBinding: HotelLayoutBinding? = null
     private var selectedStartTimeString: String? = null
@@ -41,9 +39,9 @@ class SignUp2 : Fragment() {
     private var imageUrls: List<String> = emptyList()
     private var coordinatesList: List<Double> = emptyList()
     private var government: String = ""
-   private var placeName: String = ""
-   private var hotelId: String = ""
-   private var restaurantId: String = ""
+    private var placeName: String = ""
+    private var hotelId: String = ""
+    private var restaurantId: String = ""
     private var phoneNumber: String = ""
     private var workingWeekDays: String = ""
     private var description: String = ""
@@ -56,7 +54,8 @@ class SignUp2 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSignUp2Binding.inflate(inflater, container, false)
+        // Inflate the layout for this fragment
+        binding= FragmentAddAnotherPlace2Binding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -64,11 +63,11 @@ class SignUp2 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         categoryDropDown()
         getData()
-
         binding.backArrowButton.setOnClickListener {
             requireActivity().onBackPressed()
-            Navigation.findNavController(view).navigate(R.id.signUp1)
+            view?.findNavController()?.navigate(R.id.action_addAnotherPlace2_to_addAnotherPlaceFragment)
         }
+
         binding.submitButton.setOnClickListener {
             when (binding.categorySpinnerAutoComplete.text.toString()) {
                 "Restaurant" -> addRestaurant()
@@ -79,7 +78,6 @@ class SignUp2 : Fragment() {
         binding.categorySpinnerAutoComplete.setOnItemClickListener { _, _, position, _ ->
             onCategorySelected(position)
         }
-
     }
 
     private fun daysDropDown() {
@@ -107,7 +105,7 @@ class SignUp2 : Fragment() {
     }
 
     private fun openTimePickerFrom() {
-        val isSystem24Hour = is24HourFormat(requireContext())
+        val isSystem24Hour = DateFormat.is24HourFormat(requireContext())
         val clockFormat = if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
 
         val picker = MaterialTimePicker.Builder()
@@ -130,7 +128,7 @@ class SignUp2 : Fragment() {
     }
 
     private fun openTimePickerTo() {
-        val isSystem24Hour = is24HourFormat(requireContext())
+        val isSystem24Hour = DateFormat.is24HourFormat(requireContext())
         val clockFormat = if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
 
         val picker = MaterialTimePicker.Builder()
@@ -147,7 +145,7 @@ class SignUp2 : Fragment() {
             val totalMinutes = selectedHour * 60 + selectedMinute
             selectedEndTime = totalMinutes.toDouble() / 60.0
             selectedEndTimeString = String.format("%02d:%02d", selectedHour, selectedMinute)
-        //String.format("%02d\\:%02d", selectedHour, selectedMinute)
+            //String.format("%02d\\:%02d", selectedHour, selectedMinute)
             // Update the selected time in the spinner
             restaurantLayoutBinding?.editTextTimeTo?.setText(selectedEndTimeString.toString())
             Log.e("timeEnd", selectedStartTimeString.toString())
@@ -203,7 +201,7 @@ class SignUp2 : Fragment() {
             this.closeAt = selectedEndTime.toString()
             this.StartingTime = selectedStartTime.toString()
             this.address = fullAddress
-           this.cuisine=cuisine
+            this.cuisine=cuisine
             this.city = government
 
             this.Description = description
@@ -219,9 +217,9 @@ class SignUp2 : Fragment() {
             Log.e("restaurantId",restaurantId)
             Toast.makeText(requireContext(), "Place Added", Toast.LENGTH_SHORT).show()
             CoroutineScope(Dispatchers.Main).launch {
-                delay(2000)
+                delay(1000)
                 view?.findNavController()
-                    ?.navigate(R.id.action_signUp2_to_loadingOwnerFragment)
+                    ?.navigate(R.id.action_addAnotherPlace2_to_loadingNewPlaceFragment)
             }
         }
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
@@ -254,13 +252,13 @@ class SignUp2 : Fragment() {
         viewModel.addHotel(hotelRequest)
         viewModel.hotelResponse.observe(viewLifecycleOwner) {
             Log.d("HotelFragment", "Response: $it")
-          hotelId=  it.data.document._id
+            hotelId=  it.data.document._id
             Log.e("hotelId",hotelId)
             Toast.makeText(requireContext(), "Place Added", Toast.LENGTH_SHORT).show()
             CoroutineScope(Dispatchers.Main).launch {
-                delay(2000)
+                delay(1000)
                 view?.findNavController()
-                    ?.navigate(R.id.action_signUp2_to_loadingOwnerFragment)
+                    ?.navigate(R.id.action_addAnotherPlace2_to_loadingNewPlaceFragment)
             }
         }
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->

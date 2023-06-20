@@ -6,10 +6,10 @@
             android:icon="@drawable/ic_edit_profile"
             android:id="@+id/editProfileFragment" />
 
-        <item android:title="Change password"
-            android:icon="@drawable/ic_password"
+        <item android:title="Add another place "
+            android:icon="@drawable/ic_add_24"
             android:iconTint="#E76D24"
-            android:id="@+id/changePassword"/>
+            android:id="@+id/addAnotherPlace"/>
 
         <item
             android:iconTint="#E76D24"

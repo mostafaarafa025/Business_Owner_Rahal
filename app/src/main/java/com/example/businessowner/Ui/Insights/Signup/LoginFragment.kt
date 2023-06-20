@@ -1,5 +1,6 @@
 package com.example.businessowner.Ui.Insights.Signup
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +13,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.example.businessowner.R
@@ -23,16 +27,21 @@ import com.example.businessowner.Ui.Insights.viewmodel.SharedViewModel
 import com.example.businessowner.databinding.FragmentLoginBinding
 import com.example.businessowner.model.authentication.LoginRequest
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
     lateinit var binding: FragmentLoginBinding
     private val requestViewModel: RequestViewModel by viewModels()
     private lateinit var emailEditText: EditText
-    private val sharedViewModel: SharedViewModel by viewModels()
+   // private var dataStore: DataStore<Preferences>? = null
     private lateinit var passwordEditText: EditText
     private val authViewModel: AuthViewModel by viewModels()
     private lateinit var emailErrorMessage: TextView
+    private lateinit var tokenId:String
     private lateinit var passwordErrorMessage: TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +49,10 @@ class LoginFragment : Fragment() {
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,6 +75,14 @@ class LoginFragment : Fragment() {
         }
     }
 
+
+    private fun storeTokenInStorage(token: String) {
+        val sharedPreferences = requireContext().getSharedPreferences("YourPrefsName", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("token", token)
+        editor.apply()
+    }
+
     private fun login() {
 
         val email = emailEditText.text.toString()
@@ -74,16 +95,15 @@ class LoginFragment : Fragment() {
         authViewModel.loginResponse.observe(viewLifecycleOwner) { data ->
             if (data != null) {
                 data?.let {
-                    Log.e("success", data.data.user.name.toString())
-                    Log.e("success", data.data.user.email.toString())
+                    Log.e("name", data.data.user.name.toString())
+                    Log.e("email", data.data.user.email.toString())
                     Log.e("id", data.data.user.id.toString())
-                    Log.e("success", data.data.user.password.toString())
                     Log.e("role", data.data.user.role.toString())
-                    Log.e("token", data.token.toString())
+                    tokenId=data.token
+                    Log.e("token",tokenId)
                 }
-//               checkRestaurantResponse()
-//              checkHotelResponse()
-                checkPlaceResponse()
+                storeTokenInStorage(tokenId)
+               checkPlaceResponse()
             } else
                 Toast.makeText(activity, "Login Failed ", Toast.LENGTH_LONG).show()
         }
@@ -134,7 +154,7 @@ class LoginFragment : Fragment() {
             }
         }
     }
-
+//
 //    private fun checkRestaurantResponse() {
 //        requestViewModel.getRestaurantResponse()
 //        requestViewModel.getRestaurantResponseLiveData.observe(viewLifecycleOwner) { response ->
@@ -160,28 +180,28 @@ class LoginFragment : Fragment() {
 //        }
 //    }
 //
-    private fun checkHotelResponse() {
-        requestViewModel.getHotelResponse()
-        requestViewModel.getHotelResponseLiveData.observe(viewLifecycleOwner) { response ->
-            val resultCount = response.size
-            if (resultCount == 0) {
-                Log.e("noHotel", "empty")
-                view?.findNavController()?.navigate(R.id.action_loginFragment_to_signUp1)
-            } else if (resultCount == 1) {
-                Log.e("oneHotel", "oneHotel")
-                val countIndexHotel = "0"
-                val hotelId = response[0].id
-                val intent = Intent(requireContext(), InsightsActivity::class.java)
-                intent.putExtra("countIndexHotel", countIndexHotel)
-                intent.putExtra("hotelId", hotelId)
-                startActivity(intent)
-            } else if (resultCount > 1) {
-                Log.e("HotelCount", "more than one hotel")
-                view?.findNavController()
-                    ?.navigate(R.id.action_loginFragment_to_choosingWhichPlaceFragment)
-            }
-        }
-    }
+//    private fun checkHotelResponse() {
+//        requestViewModel.getHotelResponse()
+//        requestViewModel.getHotelResponseLiveData.observe(viewLifecycleOwner) { response ->
+//            val resultCount = response.size
+//            if (resultCount == 0) {
+//                Log.e("noHotel", "empty")
+//                view?.findNavController()?.navigate(R.id.action_loginFragment_to_signUp1)
+//            } else if (resultCount == 1) {
+//                Log.e("oneHotel", "oneHotel")
+//                val countIndexHotel = "0"
+//                val hotelId = response[0].id
+//                val intent = Intent(requireContext(), InsightsActivity::class.java)
+//                intent.putExtra("countIndexHotel", countIndexHotel)
+//                intent.putExtra("hotelId", hotelId)
+//                startActivity(intent)
+//            } else if (resultCount > 1) {
+//                Log.e("HotelCount", "more than one hotel")
+//                view?.findNavController()
+//                    ?.navigate(R.id.action_loginFragment_to_choosingWhichPlaceFragment)
+//            }
+//        }
+//    }
 
     private fun checkPlaceResponse() {
         requestViewModel.getRestaurantResponse()
@@ -215,8 +235,9 @@ class LoginFragment : Fragment() {
                     startActivity(intent)
                 } else if (restaurantResultCount == 0 && hotelResultCount > 1) {
                     Log.e("HotelCount", "more than one hotel")
-                    view?.findNavController()?.navigate(R.id.action_loginFragment_to_choosingWhichPlaceFragment)                }
+                    view?.findNavController()?.navigate(R.id.action_loginFragment_to_choosingWhichHotelFragment)                }
             }
         }
     }
+
 }

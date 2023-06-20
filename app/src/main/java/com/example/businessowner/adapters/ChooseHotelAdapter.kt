@@ -2,29 +2,35 @@ package com.example.businessowner.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.businessowner.R
 import com.example.businessowner.Ui.Insights.viewmodel.RequestViewModel
 import com.example.businessowner.databinding.ChoosenplaceitemBinding
 import com.example.businessowner.model.getRespond.hotel.Hotel
-import com.example.businessowner.model.getRespond.restaurant.Restaurant
 
-class ChooseHotelAdapter(private val requestViewModel: RequestViewModel): RecyclerView.Adapter<ChooseHotelAdapter.ViewHolder>() {
+class ChooseHotelAdapter(requestViewModel: RequestViewModel) : RecyclerView.Adapter<ChooseHotelAdapter.ViewHolder>() {
     inner class ViewHolder(private val viewBinding: ChoosenplaceitemBinding): RecyclerView.ViewHolder(viewBinding.root) {
+
         fun bind(item:Hotel , position:Int){
             itemView.setOnClickListener {
                 onItemClickListener?.invoke(item,position)
             }
+
             viewBinding.apply {
+                textView.text=item.name
                 Glide.with(itemView)
                     .load(item.image)
                     .error(R.drawable.hotel)
-                    .into(imageView)
-                textView.text=item.name
+                    .into(imageViewId)
             }
+
+
+
         }
 
     }

@@ -264,17 +264,7 @@
                 app:shapeAppearanceOverlay="@style/rounded"
                 android:id="@+id/map_iv"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alexandria,Egypt"
-                android:textSize="24sp"
-                android:id="@+id/city"
-                android:layout_marginTop="12dp"
-                android:textColor="#8F9090"
-                app:layout_constraintTop_toBottomOf="@id/map_iv"
-                app:layout_constraintStart_toStartOf="@id/location"
-                />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     <com.google.android.material.navigation.NavigationView

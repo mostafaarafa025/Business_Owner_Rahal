@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.businessowner.Ui.Insights.insights.InsightsActivity
 import com.example.businessowner.Ui.Insights.viewmodel.RequestViewModel
-import com.example.businessowner.adapters.ChooseHotelAdapter
 import com.example.businessowner.adapters.ChooseRestaurantAdapter
 import com.example.businessowner.databinding.FragmentChoosingWhichPlaceBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,13 +17,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ChoosingWhichPlaceFragment : Fragment() {
     private val requestViewModel:RequestViewModel by viewModels()
+
     lateinit var binding:FragmentChoosingWhichPlaceBinding
-    private lateinit var chooseHotelAdapter: ChooseHotelAdapter
     private lateinit var chooseRestaurantAdapter: ChooseRestaurantAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         chooseRestaurantAdapter= ChooseRestaurantAdapter(requestViewModel)
-        chooseHotelAdapter=ChooseHotelAdapter(requestViewModel)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,15 +32,11 @@ class ChoosingWhichPlaceFragment : Fragment() {
         // Inflate the layout for this fragment
         binding= FragmentChoosingWhichPlaceBinding.inflate(inflater,container,false)
         return binding.root
-
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
        getChosenRestaurant()
         setUpRestaurantRecyclerView()
-        getChosenHotel()
-        setUpHotelRecyclerView()
 
     }
     private fun getChosenRestaurant(){
@@ -64,25 +59,6 @@ class ChoosingWhichPlaceFragment : Fragment() {
             adapter=chooseRestaurantAdapter
         }
     }
-        private fun getChosenHotel(){
-            requestViewModel.getHotelResponse()
-            requestViewModel.getHotelResponseLiveData.observe(viewLifecycleOwner){
-                chooseHotelAdapter.differ.submitList(it)
-            }
-            chooseHotelAdapter.onItemClickListener={hotel,position ->
-                val countIndexHotel=position.toString()
-                val hotelId=hotel.id
-                Log.d("HotelClicked","Position: $position")
-                val intent= Intent(requireContext(), InsightsActivity::class.java)
-                intent.putExtra("countIndexHotel",countIndexHotel)
-                intent.putExtra("hotelId",hotelId)
-                startActivity(intent)
-            }
-        }
-    private fun setUpHotelRecyclerView(){
-        binding.recyclerViewPlace.apply {
-            adapter=chooseHotelAdapter
-        }
-    }
+
 
 }

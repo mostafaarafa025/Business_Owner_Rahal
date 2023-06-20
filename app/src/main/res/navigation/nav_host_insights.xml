@@ -23,11 +23,43 @@
         <action
             android:id="@+id/action_profileFragment2_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment2_to_addAnotherPlaceFragment"
+            app:destination="@id/addAnotherPlaceFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.businessowner.Ui.Insights.insights.EditProfileFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAnotherPlaceFragment"
+        android:name="com.example.businessowner.AddAnotherPlaceFragment"
+        android:label="AddAnotherPlaceFragment" >
+        <action
+            android:id="@+id/action_addAnotherPlaceFragment_to_addAnotherPlace2"
+            app:destination="@id/addAnotherPlace2" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAnotherPlace2"
+        android:name="com.example.businessowner.AddAnotherPlace2"
+        android:label="fragment_add_another_place2"
+        tools:layout="@layout/fragment_add_another_place2" >
+        <action
+            android:id="@+id/action_addAnotherPlace2_to_addAnotherPlaceFragment"
+            app:destination="@id/addAnotherPlaceFragment" />
+        <action
+            android:id="@+id/action_addAnotherPlace2_to_loadingNewPlaceFragment"
+            app:destination="@id/loadingNewPlaceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loadingNewPlaceFragment"
+        android:name="com.example.businessowner.LoadingNewPlaceFragment"
+        android:label="fragment_loading_new_place"
+        tools:layout="@layout/fragment_loading_new_place" />
 
 </navigation>

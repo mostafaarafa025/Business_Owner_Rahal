@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.businessowner.R
 
-class ImageAdapter(private val images :List<ImageItem>):RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
+class ImageAdapter(private val images: List<ImageItem>):RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.imageItem)
         fun bind(imageItem: ImageItem) {
