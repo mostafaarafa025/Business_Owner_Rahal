@@ -10,19 +10,20 @@ import com.example.businessowner.R
 import com.example.businessowner.Ui.Insights.viewmodel.RequestViewModel
 import com.example.businessowner.databinding.ChoosenplaceitemBinding
 import com.example.businessowner.model.getRespond.restaurant.Restaurant
+import com.example.businessowner.model.getRespond.restaurant.RestaurantReview
 
 class ChooseRestaurantAdapter(requestViewModel: RequestViewModel) :RecyclerView.Adapter<ChooseRestaurantAdapter.ViewHolder>() {
         inner class ViewHolder(private val viewBinding:ChoosenplaceitemBinding):RecyclerView.ViewHolder(viewBinding.root){
-                fun bind(item:Restaurant,position: Int){
+                fun bind(item:Restaurant, position: Int){
                         itemView.setOnClickListener {
 
                 onItemClickListener?.invoke(item,position)
                         }
                         viewBinding.apply {
-//                Glide.with(itemView)
-//                        .load(item.image)
-//                        .error(R.drawable.restaurant)
-//                        .into(imageView)
+                Glide.with(itemView)
+                        .load(item.image[0])
+                        .error(R.drawable.restaurant)
+                        .into(imageViewId)
                        textView.text=item.name
                         }
                 }
@@ -46,7 +47,7 @@ class ChooseRestaurantAdapter(requestViewModel: RequestViewModel) :RecyclerView.
                         )
                 )
         }
-        var onItemClickListener: ((Restaurant,Int) -> Unit)? = null
+        var onItemClickListener: ((Restaurant, Int) -> Unit)? = null
         override fun getItemCount(): Int {
                 return  differ.currentList.size
         }

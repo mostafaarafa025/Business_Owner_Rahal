@@ -10,9 +10,7 @@ import javax.inject.Singleton
         private val homeApi: HomeApi
     ) {
         val authToken = authRepository.getAuthToken()
-            suspend fun getHotelRequest(id:String)=homeApi.getHotelRequest(id)
 
-            suspend fun getRestaurantRequest(idRes: String)=homeApi.getRestaurantRequest(idRes)
 
             suspend fun getRestaurantRespond()=homeApi.getRestaurantRespond("Bearer $authToken")
 
@@ -21,4 +19,4 @@ import javax.inject.Singleton
             suspend fun getRestaurantReviews(resId:String)=homeApi.getRestaurantReviews("Bearer $authToken",resId)
 
             suspend fun getHotelReviews(hotelId:String)=homeApi.getHotelReviews("Bearer $authToken",hotelId)
-    }
+}

@@ -1,7 +1,9 @@
 package com.example.businessowner.Ui.Insights.Signup
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignUp1 : Fragment() {
     lateinit var binding: FragmentSignUp1Binding
     val imageUrls = mutableListOf<String>()
+    private lateinit var sharedPreferences: SharedPreferences
     private var coordinatesList: List<Double> = listOf(2.5, 45.2)
     val images = mutableListOf<Uri>()
     companion object {

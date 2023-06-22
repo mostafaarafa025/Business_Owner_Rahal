@@ -1,14 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Ui.Insights.insights.EditProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+        android:id="@+id/edit_your_profile_tv_id"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+           android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="#252525"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Edit your place"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/government_spinner_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_down"
+            android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/edit_your_profile_tv_id"
+            android:layout_marginStart="22dp"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/government_spinner_auto_complete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text"
+                android:inputType="none"
+                android:padding="14dp"
+                android:text="Government"
+                android:textColor="#8F9090" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</FrameLayout>
+
+        <EditText
+            android:id="@+id/full_address_edit_text"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="#8F9090"
+            android:background="@drawable/custom_edit_text"
+            android:hint="Full Address"
+            android:inputType=""
+            android:padding="12dp"
+            app:layout_constraintStart_toStartOf="@id/government_spinner_icon"
+            app:layout_constraintTop_toBottomOf="@id/government_spinner_icon" />
+
+        <EditText
+            android:id="@+id/map_location_edit_text"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="#8F9090"
+            android:background="@drawable/custom_edit_text"
+            android:hint="Map Location"
+            android:inputType=""
+            android:padding="12dp"
+            app:layout_constraintStart_toStartOf="@id/government_spinner_icon"
+            app:layout_constraintTop_toBottomOf="@id/full_address_edit_text" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Picture"
+            android:layout_marginStart="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/map_location_edit_text"
+            android:layout_marginTop="12dp"
+            android:id="@+id/upload_picture_id"
+            android:textSize="20sp"
+            android:textColor="#252525"
+            android:fontFamily="sans-serif-medium"
+            />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toEndOf="@id/upload_picture_id"
+            app:layout_constraintBottom_toBottomOf="@id/upload_picture_id"
+            android:src="@drawable/add_image"
+            android:id="@+id/add_image_id"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/rounded"
+            />
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            app:layout_constraintStart_toStartOf="@id/government_spinner_icon"
+            app:layout_constraintTop_toBottomOf="@id/upload_picture_id"
+            android:id="@+id/ex_image_1"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/bruxies"
+            />
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            app:layout_constraintStart_toEndOf="@id/ex_image_1"
+            app:layout_constraintBottom_toBottomOf="@id/ex_image_1"
+            android:id="@+id/ex_image_2"
+            android:layout_marginStart="8dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/food"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/image_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="@id/upload_picture_id"
+            app:layout_constraintTop_toBottomOf="@id/upload_picture_id"
+            tools:listitem="@layout/image_view_item" />
+
+        <TextView
+            android:id="@+id/place_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Place name "
+            android:textColor="#252525"
+            app:layout_constraintTop_toBottomOf="@id/ex_image_1"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/upload_picture_id"
+          />
+
+
+        <EditText
+            android:id="@+id/place_name_edit_text"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#8F9090"
+            android:background="@drawable/custom_edit_text"
+            android:hint="holly.... "
+            android:inputType=""
+            android:padding="12dp"
+            app:layout_constraintStart_toStartOf="@id/government_spinner_icon"
+            app:layout_constraintTop_toBottomOf="@id/place_name" />
+
+        <TextView
+            android:id="@+id/phone_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Place number "
+            android:textColor="#252525"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/place_name"
+            app:layout_constraintTop_toBottomOf="@id/place_name_edit_text" />
+
+        <EditText
+            android:id="@+id/phone_number_edit_text"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#8F9090"
+            android:background="@drawable/custom_edit_text"
+            android:hint="010144...."
+            android:inputType=""
+            android:padding="12dp"
+            app:layout_constraintStart_toStartOf="@id/place_name_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/phone_number_tv" />
+
+        <TextView
+            android:id="@+id/write_description_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Write description"
+            android:textColor="#252525"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/place_name"
+            app:layout_constraintTop_toBottomOf="@id/phone_number_edit_text" />
+
+        <EditText
+            android:id="@+id/description_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:gravity="start"
+            android:hint="What would you like people to know about your place..."
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:textSize="14sp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/phone_number_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/write_description_text_id" />
+
+        <TextView
+            android:id="@+id/category_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Pick the category you belong to"
+            android:textColor="#252525"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/place_name"
+            app:layout_constraintTop_toBottomOf="@id/description_edit_text" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/category_spinner_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_arrow_down"
+            app:layout_constraintStart_toStartOf="@id/description_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/category_text_id">
+
+            <AutoCompleteTextView
+                android:id="@+id/category_spinner_auto_complete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text"
+                android:inputType="none"
+                android:padding="14dp"
+                android:text="Category"
+                android:textColor="#8F9090" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <FrameLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/category_spinner_icon"
+            app:layout_constraintStart_toStartOf="@id/place_name"
+            android:id="@+id/frameLayoutCategory"
+            >
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="120dp"
+            android:backgroundTintMode="screen"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="25dp"
+            android:backgroundTint="#E76D24"
+            android:text="Submit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frameLayoutCategory" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

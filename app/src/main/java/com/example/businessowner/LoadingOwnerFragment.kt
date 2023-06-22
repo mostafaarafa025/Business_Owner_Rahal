@@ -12,7 +12,6 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,19 +20,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDeepLinkBuilder
-import com.example.businessowner.Ui.Insights.insights.InsightsActivity
 import com.example.businessowner.Ui.Insights.viewmodel.RequestViewModel
-import com.example.businessowner.Ui.Insights.viewmodel.SharedViewModel
 import com.example.businessowner.broadCast.HotelAlarmReceiver
 import com.example.businessowner.databinding.FragmentLoadingOwnerBinding
-import com.example.businessowner.model.Respond.Hotel.Document
-import com.example.businessowner.model.Respond.Restaurant.DocumentRes
-import com.example.businessowner.model.getRespond.restaurant.Restaurant
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -137,9 +128,9 @@ class LoadingOwnerFragment : Fragment() {
 
         // Build the notification
         val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_email) // Replace with your small icon
-            .setContentTitle("Notification Title")
-            .setContentText("Notification Text")
+            .setSmallIcon(R.drawable.signup_logo) // Replace with your small icon
+            .setContentTitle("congratulations")
+            .setContentText("Your place has been added successfully ,Check it now")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setColor(R.color.teal_200) // Replace with your desired light color
             .setContentIntent(pendingIntent)

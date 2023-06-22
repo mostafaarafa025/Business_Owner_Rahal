@@ -6,12 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.businessowner.Network.repository.RequestRepository
-import com.example.businessowner.model.Respond.Hotel.Document
-import com.example.businessowner.model.Respond.Restaurant.DocumentRes
 import com.example.businessowner.model.getRespond.hotel.Hotel
+import com.example.businessowner.model.getRespond.restaurant.RestaurantReview
 import com.example.businessowner.model.getRespond.hotel.ReviewHotel
-import com.example.businessowner.model.getRespond.restaurant.Review
 import com.example.businessowner.model.getRespond.restaurant.Restaurant
+import com.example.businessowner.model.getRespond.restaurant.ReviewRes
+//import com.example.businessowner.model.neww.ReviewHotelNew
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,54 +19,6 @@ import javax.inject.Inject
 class RequestViewModel @Inject constructor(
     private val requestRepository: RequestRepository
 ):ViewModel() {
-    private val _getHotelRequestLiveData=MutableLiveData<List<Document>>()
-    val getHotelRequestLiveData:LiveData<List<Document>> = _getHotelRequestLiveData
-
-    fun getHotelRequest(id:String)= viewModelScope.launch {
-        try {
-        val response=requestRepository.getHotelRequest(id)
-            if (response.isSuccessful){
-                response.body()!!.data.document.let {
-            _getHotelRequestLiveData.postValue(listOf(it))
-                    Log.e("Great request  ", "HotelResponse success ")
-                }
-            }   else {
-                val errorBody = response.errorBody()?.string()
-                val statusCode = response.code()
-                Log.e(
-                    "requestViewModel",
-                    "Failed to give HotelResponse. Error body: $errorBody, Status code: $statusCode"
-                )
-
-
-            }
-
-        }catch (e: Exception){
-            Log.e("PlaceViewModel", "Failed to give HotelResponse. Exception: ${e.message}")
-        }
-    }
-    private val _getRestaurantLiveData=MutableLiveData<List<DocumentRes>>()
-    val getRestaurantLiveData:LiveData<List<DocumentRes>> = _getRestaurantLiveData
-            fun getRestaurantRequest(idRes: String)=viewModelScope.launch {
-                try {
-                    val response=requestRepository.getRestaurantRequest(idRes)
-                    if (response.isSuccessful){
-                        response.body()!!.data.document.let {
-                            _getRestaurantLiveData.postValue(listOf(it))
-                            Log.e("Great request  ", "RequestResponse success ")
-                        }
-                    }else {
-                        val errorBody = response.errorBody()?.string()
-                        val statusCode = response.code()
-                        Log.e(
-                            "requestViewModel",
-                            "Failed to give RestaurantRequest. Error body: $errorBody, Status code: $statusCode"
-                        )
-                    }
-                }catch (e: Exception){
-                    Log.e("PlaceViewModel", "Failed to give RestaurantRequest. Exception: ${e.message}")
-                }
-            }
 
     private val _getRestaurantResponseLiveData= MutableLiveData<List<Restaurant>>()
     val getRestaurantResponseLiveData:LiveData<List<Restaurant>> = _getRestaurantResponseLiveData
@@ -117,13 +69,13 @@ class RequestViewModel @Inject constructor(
     }
 
 
-    private val _getRestaurantReviewsLiveData= MutableLiveData<List<Review>>()
-    val getRestaurantReviewsLiveData:LiveData<List<Review>> = _getRestaurantReviewsLiveData
+    private val _getRestaurantReviewsLiveData= MutableLiveData<List<ReviewRes>>()
+    val getRestaurantReviewsLiveData:LiveData<List<ReviewRes>> = _getRestaurantReviewsLiveData
     fun getRestaurantReviews(resId:String)=viewModelScope.launch {
         try {
             val response=requestRepository.getRestaurantReviews(resId)
             if (response.isSuccessful){
-                response.body()!!.data.reviews.let {
+                response.body()!!.data?.restaurant?.reviews.let {
                     _getRestaurantReviewsLiveData.postValue(it)
                     Log.e("great response","getRestaurantReviews success")
                 }
@@ -139,18 +91,18 @@ class RequestViewModel @Inject constructor(
             Log.e("PlaceViewModel", "Failed to give getRestaurantReviews. Exception: ${e.message}")
         }
     }
-    private val _getHotelReviewsLiveData=MutableLiveData<List<ReviewHotel>>()
 
-
+    private val _getHotelReviewsLiveData = MutableLiveData<List<ReviewHotel>>()
     val getHotelReviewsLiveData:LiveData<List<ReviewHotel>> = _getHotelReviewsLiveData
-    fun getHotelReviews(hotelId:String)=viewModelScope.launch {
+    fun getHotelReviews(HotelId:String)=viewModelScope.launch {
         try {
-            val response=requestRepository.getHotelReviews(hotelId)
+            val response=requestRepository.getHotelReviews(HotelId)
             if (response.isSuccessful){
-             response.body()!!.data.reviews.let {
-                 _getHotelReviewsLiveData.postValue(it)
-                 Log.e("great response","getHotelReviews success")
-             }
+                response.body()!!.data?.reviews.let {
+                    _getHotelReviewsLiveData.postValue(it)
+                    Log.e("success reviews","successHotelReviews")
+                   // Log.e("success reviews",it.toString())
+                }
             }else {
                 val errorBody = response.errorBody()?.string()
                 val statusCode = response.code()
@@ -163,5 +115,8 @@ class RequestViewModel @Inject constructor(
             Log.e("PlaceViewModel", "Failed to give getHotelReviews. Exception: ${e.message}")
         }
     }
+
+
+
 
 }

@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.businessowner.R
 import com.example.businessowner.Ui.Insights.Signup.SignUpFragment
 import com.example.businessowner.Ui.Insights.viewmodel.RequestViewModel
+import com.example.businessowner.Ui.Insights.viewmodel.SharedViewModel
 import com.example.businessowner.adapters.ImageAdapter
 import com.example.businessowner.adapters.ImageItem
 import com.example.businessowner.databinding.FragmentProfileBinding
 import com.example.businessowner.model.getRespond.hotel.Hotel
 import com.example.businessowner.model.getRespond.restaurant.Restaurant
+import com.example.businessowner.model.getRespond.restaurant.RestaurantReview
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
@@ -26,6 +28,7 @@ import java.util.regex.Pattern
 @AndroidEntryPoint
 class ProfileFragment : Fragment(),NavigationView.OnNavigationItemSelectedListener {
     private val requestViewModel: RequestViewModel by viewModels()
+    private val sharedViewModel:SharedViewModel by viewModels()
     private var coordinatesList: List<Double> = emptyList()
     lateinit var binding: FragmentProfileBinding
     private lateinit var countIndexHotelString:String
@@ -176,6 +179,7 @@ class ProfileFragment : Fragment(),NavigationView.OnNavigationItemSelectedListen
         super.onDestroy()
     }
 
+    
         private fun getRestaurantResponse(){
             requestViewModel.getRestaurantResponse()
             requestViewModel.getRestaurantResponseLiveData.observe(viewLifecycleOwner){ it->

@@ -14,12 +14,17 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.businessowner.R
 import com.example.businessowner.Ui.Insights.viewmodel.AuthViewModel
 import com.example.businessowner.databinding.FragmentSignUpBinding
 import com.example.businessowner.model.authentication.SignUpRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
 @AndroidEntryPoint
@@ -92,6 +97,11 @@ class SignUpFragment : Fragment() {
                     Log.e("token",it.token.toString())
                 }
                 Toast.makeText(activity, "Register success", Toast.LENGTH_LONG).show()
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(1000)
+                    view?.findNavController()
+                        ?.navigate(R.id.action_signUpFragment_to_loginFragment)
+                }
             }else Toast.makeText(activity, "Register failed", Toast.LENGTH_LONG).show()
 
         }

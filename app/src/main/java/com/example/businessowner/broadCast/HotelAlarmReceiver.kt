@@ -38,9 +38,9 @@ class HotelAlarmReceiver:BroadcastReceiver() {
                 if (status == "active") {
                     showNotification(
                         context,
-                        "Notification Title",
-                        "Notification Text",
-                        R.drawable.ic_call, // Replace with your small icon
+                        "Rahal Owner",
+                        "Congratulations your place have been added successfully ",
+                        R.drawable.signup_logo, // Replace with your small icon
                         Color.GREEN, // Replace with your desired light color
                         CongratulationsFragment::class.java,
                         "welcome"

@@ -7,27 +7,34 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.businessowner.Ui.Insights.viewmodel.RequestViewModel
 import com.example.businessowner.databinding.ReviewItemBinding
-import com.example.businessowner.model.getRespond.restaurant.Review
+import com.example.businessowner.model.getRespond.restaurant.ReviewRes
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ReviewsRestaurantAdapter(requestViewModel: RequestViewModel) :RecyclerView.Adapter<ReviewsRestaurantAdapter.ViewHolder>() {
+
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    private val outputFormat = SimpleDateFormat("dd-MM-yyyy / HH:mm", Locale.getDefault())
         inner class ViewHolder(private val viewBinding:ReviewItemBinding):RecyclerView.ViewHolder(viewBinding.root){
 
-            fun bind(item: Review){
+            fun bind(item: ReviewRes){
                 viewBinding.apply {
-                    humanName.text=item.name
+                    humanName.text=item.userId.name
                     humanReview.text=item.comment
                     humanRate.rating=item.rating.toFloat()
-
+                    val createdAt = dateFormat.parse(item.createdAt)
+                    val formattedCreatedAt = outputFormat.format(createdAt)
+                    timeId.text = formattedCreatedAt
                 }
             }
         }
-    private val diffUtil=object : DiffUtil.ItemCallback<Review>(){
-        override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
+    private val diffUtil=object : DiffUtil.ItemCallback<ReviewRes>(){
+        override fun areItemsTheSame(oldItem: ReviewRes, newItem: ReviewRes): Boolean {
             return oldItem.id==newItem.id
         }
 
 
-        override fun areContentsTheSame(oldItem: Review, newItem: Review): Boolean {
+        override fun areContentsTheSame(oldItem: ReviewRes, newItem: ReviewRes): Boolean {
             return oldItem==newItem
         }
     }

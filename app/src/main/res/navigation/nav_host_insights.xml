@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_editProfileFragment_to_profileFragment2"
             app:destination="@id/profileFragment2" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_loadingNewPlaceFragment"
+            app:destination="@id/loadingNewPlaceFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAnotherPlaceFragment"

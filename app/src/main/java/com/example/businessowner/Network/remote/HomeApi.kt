@@ -1,8 +1,5 @@
 package com.example.businessowner.Network.remote
 
-import com.example.businessowner.model.Respond.Hotel.HotelRequestResponse
-import com.example.businessowner.model.Respond.Restaurant.RestaurantRequestResponse
-import com.example.businessowner.model.getRespond.restaurant.RestaurantReviews
 import com.example.businessowner.model.addingHotel.HotelRequest
 import com.example.businessowner.model.addingHotel.HotelResponse
 import com.example.businessowner.model.addingRestaurant.RestaurantRequest
@@ -10,9 +7,11 @@ import com.example.businessowner.model.addingRestaurant.RestaurantResponse
 import com.example.businessowner.model.authentication.LoginRequest
 import com.example.businessowner.model.authentication.SignUpRequest
 import com.example.businessowner.model.authentication.SignUpResponse
-import com.example.businessowner.model.getRespond.hotel.HotelReviews
 import com.example.businessowner.model.getRespond.hotel.getHotelRespond
 import com.example.businessowner.model.getRespond.restaurant.getRestaurantRespond
+//import com.example.businessowner.model.neww.HotelReviewsNew
+import com.example.businessowner.model.getRespond.hotel.HotelReviewsNews
+import com.example.businessowner.model.getRespond.restaurant.RestaurantReviewsNew
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -48,16 +47,6 @@ interface HomeApi {
 
 
 
-    @GET("hotels/{id}")
-    suspend fun getHotelRequest(
-    @Path("id") id:String
-    ):Response<HotelRequestResponse>
-
-    @GET("restaurants/{idRes}")
-    suspend fun getRestaurantRequest(
-        @Path("idRes") id:String
-    ):Response<RestaurantRequestResponse>
-
 
     @GET("restaurants")
     suspend fun getRestaurantRespond(
@@ -73,13 +62,13 @@ interface HomeApi {
     suspend fun getRestaurantReviews(
         @Header("Authorization") token: String,
         @Path("resId") id: String
-    ):Response<RestaurantReviews>
+    ):Response<RestaurantReviewsNew>
 
     @GET("hotels/hotelreviews/{hotelId}")
     suspend fun getHotelReviews(
         @Header("Authorization") token: String,
         @Path("hotelId") id: String
-    ):Response<HotelReviews>
+    ):Response<HotelReviewsNews>
 }
 
 
